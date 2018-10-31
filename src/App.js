@@ -24,14 +24,13 @@ function displayDateTime() {
   let year = date.getFullYear();
   let hour = numbersWithZero(date.getHours());
   let minutes = numbersWithZero(date.getMinutes());
-  let date1 = <span id= "date">{day}/{month}/{year}</span> 
-  let time = <span id= "time">{hour}:{minutes}</span>
-  return [date1, time]
+  let dat = `${day}/${month}/${year}`
+  let time = `${hour}:${minutes}`
+  return `${day}/${month}/${year} ${hour}:${minutes}`
 }
 
 function userIdGenerator() {
   var characters = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
   var id = '';
   for (let i = 0; i < 7; i++) {
     var random = Math.floor(Math.random() * 35);
@@ -40,36 +39,93 @@ function userIdGenerator() {
   return id
 }
 
-
 class App extends Component {
   state = ({
     income: [{description: 'blavjvjvvvj', amount: 300, time:displayDateTime(), id: userIdGenerator()}, {description: 'blavjvjvvvj', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
     expense:[{description: 'expense', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
     description: '',
-    amount: 0,
+    amount: '',
     totalIncome: 600,
     totalExpense: 300,
     incomeOrExpense: 'income',
-    balance: 300
+    balance: 300,
+    setClassDescr: 'warning',
+    setClassAmnt: 'warning',
+    descrInputClass: 'default',
+    amntInputClass: 'default'
   })
   
   setDescription = (e) => {
-    this.setState({description: e.target.value})
+    this.setState({
+      description: e.target.value, 
+      setClassDescr: 'warning', 
+      descrInputClass: 'default'
+    })
   }
   setAmount = (e) => {
-    this.setState({amount: e.target.value})
+    if(isNaN(e.target.value)){
+      this.setState({
+        amount: '', 
+        setClassAmnt: 'warning-visible',
+        amntInputClass: 'red'
+      })
+    } else {
+      this.setState({
+        amount: e.target.value, 
+        setClassAmnt: 'warning',
+        amntInputClass: 'default'})
+    }
   }
   setOption = (e) => {
-    console.log(e.target.value);
     this.setState({incomeOrExpense: e.target.value})
   }
   addEntry = () => {
-    if(this.state.incomeOrExpense === 'income'){
-      this.setState({income: [...this.state.income, {description: this.state.description, amount: this.state.amount, time:displayDateTime(), id: userIdGenerator()}], totalIncome: this.state.totalIncome + parseInt(this.state.amount), balance: this.state.balance + parseInt(this.state.amount)});
+    if(this.state.incomeOrExpense === 'income' && this.state.amount !== '' && this.state.description !== ''){
+
+      this.setState(
+        {income: 
+          [...this.state.income, 
+            {description: this.state.description,
+            amount: this.state.amount, 
+            time:displayDateTime(),
+            id: userIdGenerator()}],
+          amount: '',
+          description:'',
+          totalIncome: this.state.totalIncome + parseInt(this.state.amount), 
+          balance: this.state.balance + parseInt(this.state.amount),
+        });
       putInLocalStorage(this.state.income, 'income')
-    } else {
-      this.setState({expense: [...this.state.expense, {description: this.state.description, amount: this.state.amount, time:displayDateTime(), id: userIdGenerator()}], totalExpense: this.state.totalExpense + parseInt(this.state.amount), balance: this.state.balance - parseInt(this.state.amount)});
+
+    } else if (this.state.incomeOrExpense === 'expense' && this.state.amount !== '' && this.state.description !== '') {
+      this.setState({expense: 
+        [...this.state.expense, 
+          {description: this.state.description, 
+          amount: this.state.amount,
+          time:displayDateTime(),
+          id: userIdGenerator()}],
+        amount: '',
+        description:'',
+        totalExpense: this.state.totalExpense + parseInt(this.state.amount),
+        balance: this.state.balance - parseInt(this.state.amount)});
       putInLocalStorage(this.state.expense, 'expense')
+
+    } else if(this.state.amount === '' && this.state.description !== ''){
+      this.setState({
+        setClassAmnt: 'warning-visible',
+        amntInputClass: 'red'
+      }); 
+
+    } else if(this.state.amount !== '' && this.state.description === ''){
+      this.setState({
+        setClassDescr: 'warning-visible',
+        descrInputClass: 'red'}); 
+
+    } else {
+      this.setState({
+        setClassDescr: 'warning-visible', 
+        setClassAmnt: 'warning-visible', 
+        amntInputClass: 'red', 
+        descrInputClass: 'red'}); 
     }
   }
 
@@ -78,9 +134,10 @@ class App extends Component {
       <div className="App">
         <Header />
         <div id="input-container" >
-          <span id="warning">Please enter the right description and amount</span>
-          <input type="text" placeholder="Description" id="description" onInput={(e)=>{this.setDescription(e)}}/>
-          <input type="text" placeholder="Amount" id="amount"onInput={(e)=>{this.setAmount(e)}}/>
+          <span  className={this.state.setClassDescr}>Please enter description</span>
+          <span  className={this.state.setClassAmnt}>Please enter the right amount using numbers</span>
+          <input type="text" placeholder="Description" id="description" onInput={(e)=>{this.setDescription(e)}} value= {this.state.description} className={this.state.descrInputClass}/>
+          <input type="text" placeholder="Amount" id="amount"onInput={(e)=>{this.setAmount(e)}} value= {this.state.amount} className={this.state.amntInputClass}/>
           <select name="" id="transaction-type" onChange={this.setOption}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
