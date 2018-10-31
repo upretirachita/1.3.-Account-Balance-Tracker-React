@@ -24,16 +24,14 @@ function displayDateTime() {
   let year = date.getFullYear();
   let hour = numbersWithZero(date.getHours());
   let minutes = numbersWithZero(date.getMinutes());
-  let dat = `${day}/${month}/${year}`
-  let time = `${hour}:${minutes}`
   return `${day}/${month}/${year} ${hour}:${minutes}`
 }
 
 function userIdGenerator() {
-  var characters = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  var id = '';
+  let characters = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  let id = '';
   for (let i = 0; i < 7; i++) {
-    var random = Math.floor(Math.random() * 35);
+    let random = Math.floor(Math.random() * 61);
     id = id.concat(characters.charAt(random));
   }
   return id
@@ -54,7 +52,6 @@ class App extends Component {
     descrInputClass: 'default',
     amntInputClass: 'default'
   })
-  
   setDescription = (e) => {
     this.setState({
       description: e.target.value, 
@@ -81,14 +78,15 @@ class App extends Component {
   }
   addEntry = () => {
     if(this.state.incomeOrExpense === 'income' && this.state.amount !== '' && this.state.description !== ''){
-
+      const newId = userIdGenerator();
       this.setState(
         {income: 
           [...this.state.income, 
             {description: this.state.description,
             amount: this.state.amount, 
             time:displayDateTime(),
-            id: userIdGenerator()}],
+            id: newId
+          }],
           amount: '',
           description:'',
           totalIncome: this.state.totalIncome + parseInt(this.state.amount), 
@@ -102,7 +100,8 @@ class App extends Component {
           {description: this.state.description, 
           amount: this.state.amount,
           time:displayDateTime(),
-          id: userIdGenerator()}],
+          id: userIdGenerator()
+        }],
         amount: '',
         description:'',
         totalExpense: this.state.totalExpense + parseInt(this.state.amount),
@@ -128,7 +127,22 @@ class App extends Component {
         descrInputClass: 'red'}); 
     }
   }
-
+  deleteEntryincome = (e) => {
+    let newIncome = this.state.income.filter(income => {
+        if(!income.id.includes(e.target.value)){
+          return income
+        }
+    })
+    this.setState({income: newIncome})
+  }
+  deleteEntryexpense = (e) => {
+    let newExpense = this.state.expense.filter(expense => {
+        if(!expense.id.includes(e.target.value)){
+          return expense
+        }
+    })
+    this.setState({expense: newExpense})
+  }
   render() {
     return (
       <div className="App">
@@ -151,6 +165,7 @@ class App extends Component {
           total='Total income:'
           totalAmount= {this.state.totalIncome}
           data = {this.state.income}
+          funct1 = {this.deleteEntryincome}
           />
           <EntryContainer 
           name= 'Expense'
@@ -158,6 +173,7 @@ class App extends Component {
           total='Total expense:'
           totalAmount= {this.state.totalExpense}
           data = {this.state.expense}
+          funct1 = {this.deleteEntryexpense}
           />
           <div id="balance-container">
             <h3 id="h3-balance">Balance</h3>
