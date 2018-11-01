@@ -205,8 +205,7 @@ input, #add, select {
   color:gray;
 }
 
-.delete img {
-  border: none;
+.delete svg {
   height: .9rem;
   width: .9rem;
 }
@@ -224,6 +223,10 @@ input, #add, select {
   width: 100%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.red-balance {
+  color: red;
 }
 
 #h3-balance {

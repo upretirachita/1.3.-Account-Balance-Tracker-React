@@ -39,7 +39,7 @@ function userIdGenerator() {
 
 class App extends Component {
   state = ({
-    income: [{description: 'blavjvjvvvj', amount: 300, time:displayDateTime(), id: userIdGenerator()}, {description: 'blavjvjvvvj', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
+    income: [{description: 'salary', amount: 300, time:displayDateTime(), id: userIdGenerator()}, {description: 'bonus', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
     expense:[{description: 'expense', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
     description: '',
     amount: '',
@@ -90,7 +90,7 @@ class App extends Component {
           amount: '',
           description:'',
           totalIncome: this.state.totalIncome + parseInt(this.state.amount), 
-          balance: this.state.balance + parseInt(this.state.amount),
+          balance: this.state.balance + parseInt(this.state.amount)
         });
       putInLocalStorage(this.state.income, 'income')
 
@@ -128,20 +128,40 @@ class App extends Component {
     }
   }
   deleteEntryincome = (e) => {
+    let deletedIncome;
     let newIncome = this.state.income.filter(income => {
         if(!income.id.includes(e.target.value)){
           return income
+        } else {
+          deletedIncome = income.amount
         }
     })
-    this.setState({income: newIncome})
+    this.setState({income: newIncome, totalIncome: this.state.totalIncome - deletedIncome, balance: this.state.totalIncome - deletedIncome - this.state.totalExpense})
   }
   deleteEntryexpense = (e) => {
+    let deletedExpense;
     let newExpense = this.state.expense.filter(expense => {
         if(!expense.id.includes(e.target.value)){
           return expense
+        } else {
+          deletedExpense = expense.amount
         }
     })
-    this.setState({expense: newExpense})
+    this.setState({expense: newExpense, totalExpense: this.state.totalExpense - deletedExpense, balance: this.state.totalIncome - this.state.totalExpense + parseInt(deletedExpense)})
+  }
+  makeBalanceRed = () => {
+    if(parseInt(this.state.balance) < 0) {
+      return "red-balance"
+    } else {
+      return "default-balance"
+    }
+  }
+  addMinus= () => {
+    if (this.state.totalExpense> 0){
+      return '-' + this.state.totalExpense
+    } else {
+      return 0
+    }
   }
   render() {
     return (
@@ -151,8 +171,8 @@ class App extends Component {
           <span  className={this.state.setClassDescr}>Please enter description</span>
           <span  className={this.state.setClassAmnt}>Please enter the right amount using numbers</span>
           <input type="text" placeholder="Description" id="description" onInput={(e)=>{this.setDescription(e)}} value= {this.state.description} className={this.state.descrInputClass}/>
-          <input type="text" placeholder="Amount" id="amount"onInput={(e)=>{this.setAmount(e)}} value= {this.state.amount} className={this.state.amntInputClass}/>
-          <select name="" id="transaction-type" onChange={this.setOption}>
+          <input type="text" placeholder="Amount" id="amount" onInput={(e)=>{this.setAmount(e)}} value={this.state.amount} className={this.state.amntInputClass}/>
+          <select id="transaction-type" onChange={this.setOption}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
@@ -160,30 +180,29 @@ class App extends Component {
         </div>
         <div id="main">
           <EntryContainer 
-          name= 'Income'
+          name='Income'
           id='income'
           total='Total income:'
-          totalAmount= {this.state.totalIncome}
-          data = {this.state.income}
-          funct1 = {this.deleteEntryincome}
+          totalAmount={this.state.totalIncome}
+          data={this.state.income}
+          deleteFunc={this.deleteEntryincome}
           />
           <EntryContainer 
-          name= 'Expense'
+          name='Expense'
           id='expense'
           total='Total expense:'
-          totalAmount= {this.state.totalExpense}
-          data = {this.state.expense}
-          funct1 = {this.deleteEntryexpense}
+          totalAmount={this.addMinus()}
+          data={this.state.expense}
+          deleteFunc={this.deleteEntryexpense}
           />
           <div id="balance-container">
             <h3 id="h3-balance">Balance</h3>
             <div className="total-container">
                 <span>Total:</span>
-                <span id="total-balance">{this.state.balance}€</span>
+                <span id="total-balance" className={this.makeBalanceRed()}>{this.state.balance}€</span>
             </div>
           </div>
         </div>
-        
       </div>
     );
   }
