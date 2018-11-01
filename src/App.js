@@ -37,6 +37,10 @@ function userIdGenerator() {
   return id
 }
 
+// **************************************************************************************
+// **************************************************************************************
+// **************************************************************************************
+
 class App extends Component {
   state = ({
     income: [{description: 'salary', amount: 300, time:displayDateTime(), id: userIdGenerator()}, {description: 'bonus', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
@@ -127,27 +131,31 @@ class App extends Component {
         descrInputClass: 'red'}); 
     }
   }
-  deleteEntryincome = (e) => {
+  deleteEntryincome = (id) => {
+    if(window.confirm('Are you sure you want to delete this entry?')){
     let deletedIncome;
     let newIncome = this.state.income.filter(income => {
-        if(!income.id.includes(e.target.value)){
+        if(!income.id.includes(id)){
           return income
         } else {
           deletedIncome = income.amount
         }
     })
     this.setState({income: newIncome, totalIncome: this.state.totalIncome - deletedIncome, balance: this.state.totalIncome - deletedIncome - this.state.totalExpense})
+    }
   }
-  deleteEntryexpense = (e) => {
+  deleteEntryexpense = (id) => {
+    if(window.confirm('Are you sure you want to delete this entry?')){
     let deletedExpense;
     let newExpense = this.state.expense.filter(expense => {
-        if(!expense.id.includes(e.target.value)){
+        if(!expense.id.includes(id)){
           return expense
         } else {
           deletedExpense = expense.amount
         }
     })
     this.setState({expense: newExpense, totalExpense: this.state.totalExpense - deletedExpense, balance: this.state.totalIncome - this.state.totalExpense + parseInt(deletedExpense)})
+    }
   }
   makeBalanceRed = () => {
     if(parseInt(this.state.balance) < 0) {

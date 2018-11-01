@@ -196,6 +196,7 @@ input, #add, select {
 
 .delete {
   outline: none;
+  border: none;
   margin: 0;
   padding: 0;
   height: 1.3rem;
@@ -206,6 +207,7 @@ input, #add, select {
 }
 
 .delete svg {
+  margin-top: 2px;
   height: .9rem;
   width: .9rem;
 }
