@@ -44,8 +44,10 @@ let lsTotalIncome = 0;
 let lsTotalExpense = 0;
 
 const getInitialTotals = () => {
-  lsIncome.forEach(income => lsTotalIncome += income.amount)
-  lsExpense.forEach(expense => lsTotalExpense += expense.amount)
+  if(lsIncome && lsExpense){
+    lsIncome.forEach(income => lsTotalIncome += income.amount)
+    lsExpense.forEach(expense => lsTotalExpense += expense.amount)
+  }
 }
 
 getInitialTotals()
@@ -56,10 +58,10 @@ getInitialTotals()
 
 class App extends Component {
   state = ({
-    income: lsIncome, // gets initial value from local storage
-    expense: lsExpense, // gets initial value from local storage
-    totalIncome: lsTotalIncome, // gets initial value from local storage
-    totalExpense: lsTotalExpense, // gets initial value from local storage
+    income: lsIncome || [], // gets initial value from local storage
+    expense: lsExpense || [], // gets initial value from local storage
+    totalIncome: lsTotalIncome || 0, // gets initial value from local storage
+    totalExpense: lsTotalExpense || 0, // gets initial value from local storage
     balance: lsTotalIncome - lsTotalExpense,
     description: '', // user input
     amount: '', // user input
@@ -189,7 +191,10 @@ class App extends Component {
         totalIncome: this.state.totalIncome - deletedIncome, 
         balance: this.state.totalIncome - this.state.totalExpense - deletedIncome 
       })
+
+      putInLocalStorage(newIncome, 'income');
     }
+    
   }
 
   deleteEntryExpense = (id) => {
@@ -211,6 +216,8 @@ class App extends Component {
         totalExpense: this.state.totalExpense - deletedExpense, 
         balance: this.state.totalIncome - this.state.totalExpense + deletedExpense
       })
+
+      putInLocalStorage(newExpense, 'expense');
     }
   }
 
@@ -264,7 +271,7 @@ class App extends Component {
           </select>
 
           <button id="add" onClick={this.addEntry}>Add</button>
-          
+
         </div>
 
         <main className="main">
