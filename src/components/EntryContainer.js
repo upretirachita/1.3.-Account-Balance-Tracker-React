@@ -10,7 +10,7 @@ const EntryContainer = (props) => {
             <div key={element.id} className="added">
               <span className="dateAndTime">{element.time}</span>
               <span id="name">{element.description}</span>
-              <span id="amountSpan">{element.amount}€</span>
+              <span id="amountSpan">{element.amount.toFixed(2)}€</span>
               <DeleteButton value={element.id} deleteFunc={props.deleteFunc}/>
             </div>)}
         </div>

@@ -43,18 +43,19 @@ function userIdGenerator() {
 
 class App extends Component {
   state = ({
-    income: [{description: 'salary', amount: 300, time:displayDateTime(), id: userIdGenerator()}, {description: 'bonus', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
-    expense:[{description: 'expense', amount: 300, time:displayDateTime(), id: userIdGenerator()}],
+    income: [{description: 'salary', amount: 300.51, time:displayDateTime(), id: userIdGenerator()}, {description: 'bonus', amount: 300.51, time:displayDateTime(), id: userIdGenerator()}],
+    expense:[{description: 'expense', amount: 300.51, time:displayDateTime(), id: userIdGenerator()}],
     description: '',
-    amount: '',
-    totalIncome: 600,
-    totalExpense: 300,
+    amount: 0,
+    totalIncome: 601.02,
+    totalExpense: 300.51,
     incomeOrExpense: 'income',
-    balance: 300,
+    balance: 300.51,
     setClassDescr: 'warning',
     setClassAmnt: 'warning',
     descrInputClass: 'default',
-    amntInputClass: 'default'
+    amntInputClass: 'default',
+    amField: ''
   })
   setDescription = (e) => {
     this.setState({
@@ -64,17 +65,21 @@ class App extends Component {
     })
   }
   setAmount = (e) => {
-    if(isNaN(e.target.value)){
+    let input = e.target.value
+    if(isNaN(input)){
       this.setState({
-        amount: '', 
+        amount: 0, 
         setClassAmnt: 'warning-visible',
-        amntInputClass: 'red'
+        amntInputClass: 'red',
+        amField: ''
       })
     } else {
       this.setState({
-        amount: e.target.value, 
+        amount: parseFloat(input), 
         setClassAmnt: 'warning',
-        amntInputClass: 'default'})
+        amntInputClass: 'default',
+        amField: input
+      })
     }
   }
   setOption = (e) => {
@@ -87,14 +92,15 @@ class App extends Component {
         {income: 
           [...this.state.income, 
             {description: this.state.description,
-            amount: this.state.amount, 
+              amount: this.state.amount, 
             time:displayDateTime(),
             id: newId
           }],
           amount: '',
+          amField: '',
           description:'',
-          totalIncome: this.state.totalIncome + parseInt(this.state.amount), 
-          balance: this.state.balance + parseInt(this.state.amount)
+          totalIncome: this.state.totalIncome + this.state.amount, 
+          balance: this.state.balance + this.state.amount
         });
       putInLocalStorage(this.state.income, 'income')
 
@@ -102,14 +108,15 @@ class App extends Component {
       this.setState({expense: 
         [...this.state.expense, 
           {description: this.state.description, 
-          amount: this.state.amount,
+            amount: this.state.amount, 
           time:displayDateTime(),
           id: userIdGenerator()
         }],
         amount: '',
+        amField: '',
         description:'',
-        totalExpense: this.state.totalExpense + parseInt(this.state.amount),
-        balance: this.state.balance - parseInt(this.state.amount)});
+        totalExpense: this.state.totalExpense + this.state.amount,
+        balance: this.state.balance - this.state.amount});
       putInLocalStorage(this.state.expense, 'expense')
 
     } else if(this.state.amount === '' && this.state.description !== ''){
@@ -148,17 +155,19 @@ class App extends Component {
     if(window.confirm('Are you sure you want to delete this entry?')){
     let deletedExpense;
     let newExpense = this.state.expense.filter(expense => {
+      let result;
         if(!expense.id.includes(id)){
-          return expense
+          result = expense
         } else {
           deletedExpense = expense.amount
         }
+        return result
     })
-    this.setState({expense: newExpense, totalExpense: this.state.totalExpense - deletedExpense, balance: this.state.totalIncome - this.state.totalExpense + parseInt(deletedExpense)})
+    this.setState({expense: newExpense, totalExpense: this.state.totalExpense - deletedExpense, balance: this.state.totalIncome - this.state.totalExpense + deletedExpense})
     }
   }
   makeBalanceRed = () => {
-    if(parseInt(this.state.balance) < 0) {
+    if(this.state.balance < 0) {
       return "red-balance"
     } else {
       return "default-balance"
@@ -166,9 +175,9 @@ class App extends Component {
   }
   addMinus= () => {
     if (this.state.totalExpense> 0){
-      return '-' + this.state.totalExpense
+      return '-' + this.state.totalExpense.toFixed(2)
     } else {
-      return 0
+      return this.state.totalExpense.toFixed(2)
     }
   }
   render() {
@@ -179,7 +188,7 @@ class App extends Component {
           <span  className={this.state.setClassDescr}>Please enter description</span>
           <span  className={this.state.setClassAmnt}>Please enter the right amount using numbers</span>
           <input type="text" placeholder="Description" id="description" onInput={(e)=>{this.setDescription(e)}} value= {this.state.description} className={this.state.descrInputClass}/>
-          <input type="text" placeholder="Amount" id="amount" onInput={(e)=>{this.setAmount(e)}} value={this.state.amount} className={this.state.amntInputClass}/>
+          <input type="text" placeholder="Amount" id="amount" onInput={(e)=>{this.setAmount(e)}} value={this.state.amField} className={this.state.amntInputClass}/>
           <select id="transaction-type" onChange={this.setOption}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
@@ -191,7 +200,7 @@ class App extends Component {
           name='Income'
           id='income'
           total='Total income:'
-          totalAmount={this.state.totalIncome}
+          totalAmount={this.state.totalIncome.toFixed(2)}
           data={this.state.income}
           deleteFunc={this.deleteEntryincome}
           />
@@ -207,7 +216,7 @@ class App extends Component {
             <h3 id="h3-balance">Balance</h3>
             <div className="total-container">
                 <span>Total:</span>
-                <span id="total-balance" className={this.makeBalanceRed()}>{this.state.balance}€</span>
+                <span id="total-balance" className={this.makeBalanceRed()}>{this.state.balance.toFixed(2)}€</span>
             </div>
           </div>
         </div>
