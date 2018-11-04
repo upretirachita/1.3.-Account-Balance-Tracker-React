@@ -51,18 +51,17 @@ class App extends Component {
     totalExpense: 300.51,
     incomeOrExpense: 'income',
     balance: 300.51,
-    setClassDescr: 'warning',
-    setClassAmnt: 'warning',
+    setClassDescr: 'noWarning',
+    setClassAmnt: 'noWarning',
     descrInputClass: 'default',
-    amntInputClass: 'default',
-    amField: ''
+    amntInputClass: 'default'
   })
   setDescription = (e) => {
-    this.setState({
-      description: e.target.value, 
-      setClassDescr: 'warning', 
-      descrInputClass: 'default'
-    })
+      this.setState({
+        description: e.target.value.toString(), 
+        setClassDescr: 'noWarning', 
+        descrInputClass: 'default'
+      })
   }
   setAmount = (e) => {
     let input = e.target.value
@@ -70,15 +69,13 @@ class App extends Component {
       this.setState({
         amount: 0, 
         setClassAmnt: 'warning-visible',
-        amntInputClass: 'red',
-        amField: ''
+        amntInputClass: 'red'
       })
     } else {
       this.setState({
         amount: parseFloat(input), 
-        setClassAmnt: 'warning',
-        amntInputClass: 'default',
-        amField: input
+        setClassAmnt: 'noWarning',
+        amntInputClass: 'default'
       })
     }
   }
@@ -103,7 +100,8 @@ class App extends Component {
           balance: this.state.balance + this.state.amount
         });
       putInLocalStorage(this.state.income, 'income')
-
+      this.descRef.value = ''
+      this.amtRef.value = ''
     } else if (this.state.incomeOrExpense === 'expense' && this.state.amount !== '' && this.state.description !== '') {
       this.setState({expense: 
         [...this.state.expense, 
@@ -118,7 +116,8 @@ class App extends Component {
         totalExpense: this.state.totalExpense + this.state.amount,
         balance: this.state.balance - this.state.amount});
       putInLocalStorage(this.state.expense, 'expense')
-
+      this.descRef.value = ''
+      this.amtRef.value = ''
     } else if(this.state.amount === '' && this.state.description !== ''){
       this.setState({
         setClassAmnt: 'warning-visible',
@@ -187,8 +186,22 @@ class App extends Component {
         <div id="input-container" >
           <span  className={this.state.setClassDescr}>Please enter description</span>
           <span  className={this.state.setClassAmnt}>Please enter the right amount using numbers</span>
-          <input type="text" placeholder="Description" id="description" onInput={(e)=>{this.setDescription(e)}} value= {this.state.description} className={this.state.descrInputClass}/>
-          <input type="text" placeholder="Amount" id="amount" onInput={(e)=>{this.setAmount(e)}} value={this.state.amField} className={this.state.amntInputClass}/>
+          <input 
+            type="text" 
+            placeholder="Description" 
+            id="description"  
+            className={this.state.descrInputClass} 
+            onInput={(e)=>{this.setDescription(e)}} 
+            ref={(input)=>{this.descRef = input}}
+          />
+          <input 
+            type="text" 
+            placeholder="Amount" 
+            id="amount" 
+            className={this.state.amntInputClass}
+            onInput={(e)=>{this.setAmount(e)}}
+            ref={(input)=>{this.amtRef = input}}
+          />
           <select id="transaction-type" onChange={this.setOption}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
