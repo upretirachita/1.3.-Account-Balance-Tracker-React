@@ -16,4 +16,4 @@
 
 * Saves your data to the local storage.
 
-![](example.gif)
+![](exampleABT.gif)
