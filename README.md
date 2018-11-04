@@ -4,7 +4,7 @@
 
 ### This is a simple account balance tracker created using React. 
 
-Check it out [here] (https://distracted-joliot-d9690a.netlify.com/):
+Check it out [here](https://distracted-joliot-d9690a.netlify.com/)
 
 * Takes description and amount for your income or expense.
 
