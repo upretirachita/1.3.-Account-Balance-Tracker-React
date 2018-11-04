@@ -83,7 +83,7 @@ input, #add, select {
   border: 1px solid rgb(235, 235, 235);
 }
 
-.noWarning {
+.invisible {
   text-align: left;
   width: 35.5%;
   color: transparent;
@@ -93,7 +93,7 @@ input, #add, select {
   padding-left: 5px;
 }
 
-.warning-visible {
+.visible {
   text-align: left;
   width: 35.5%;
   font-size: .7rem;
@@ -113,7 +113,7 @@ input, #add, select {
   color: rgb(182, 182, 182);
 }
 
-#main {
+.main {
   width: 80%;
   display: flex;
   flex-wrap: wrap;
