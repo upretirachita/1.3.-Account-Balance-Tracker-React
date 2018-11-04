@@ -18,8 +18,6 @@ Check it out [here](https://distracted-joliot-d9690a.netlify.com/)
 
 * Saves your data to the local storage.
 
-<<<<<<< HEAD
-![](exampleABT.gif)
-=======
+
 ![](example.gif)
->>>>>>> 03bf943a25c7628533b729baab69e99fd019109b
+
