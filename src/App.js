@@ -81,12 +81,14 @@ class App extends Component {
   }
 
   getAmount= (e) => {
-    if(isNaN(e.target.value)){
+    if(isNaN(e.target.value) ||e.target.value < 0 ){
       this.setState({
         amount: '', 
         classNameAmntSpan: 'visible',
         classNameAmntInput: 'red'
       })
+      this.amtRef.value = '';
+
     } else {
       this.setState({
         amount: parseFloat(e.target.value), 
@@ -202,14 +204,13 @@ class App extends Component {
       let deletedExpense;
 
       let newExpense = this.state.expense.filter(expense => {
-        let result;
-
+       
           if (!expense.id.includes(id)) {
-            result = expense
+            return expense
           } else {
             deletedExpense = expense.amount
           }
-          return result
+      
       })
       this.setState({
         expense: newExpense, 
