@@ -1,16 +1,21 @@
+:root {
+  --main-border-color: rgb(235, 235, 235);
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
-  background-color: white;
   color: rgb(69, 67, 67);
-  font-family: 'Roboto', sans-serif;
-  /* background-color: rgb(249, 249, 249); */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
-.App{
+.App {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -18,135 +23,138 @@ body {
   min-width: 420px;
 }
 
-header{
+header {
   width: 100%;
-  height: 8rem;
-  background-image: linear-gradient(  rgb(255, 134, 5), rgb(254, 163, 66));
+  height: 7rem;
   display: flex;
   align-items: center;
 }
 
 h1 {
   text-align: center;
-  color: white;
+  color: gray;
   width: 100%;
   font-size: 2rem;
 }
 
-form {
+#span-container {
   width: 100%;
 }
 
 #input-container {
   position: relative;
-  width: 80%;
-  margin: 6rem 10% 2rem 10%;
+  width: 85%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  /* justify-content: space-evenly; */
-  text-align: right;
+  margin: 1rem auto 2rem;
+  padding: 1rem 2rem 2rem;
+  border-radius: 5px;
+  border: 1px solid var(--main-border-color);
 }
 
 input, #add, select {
   line-height: 1.7rem;
   font-size: 1rem;
-  padding: 2px .5rem;
+  padding: 0 .5rem ;
   border-radius: 5px;
   border: none;
   outline: none;
 }
 
 #description, #amount {
-  width: 35.5%;
-  margin-right: 15px;
+  width: 25%;
+  margin-right: 2rem;
 }
 
 .red {
-  border: 1px solid red;
+  border: 1px solid rgb(210, 81, 81);
 }
 
-#add{
-  width: 10%;
-}
-
-#transaction-type  {
-  margin-right: 15px;
-  width: 15%;
-  height: 1.8rem;
-  border:1px solid rgb(255, 134, 5);
-  color: rgb(255, 134, 5);
-  background-color: white;
+#span-container {
+  width: 80%;
+  margin: 0 10%;
 }
 
 .default{
-  border: 1px solid rgb(235, 235, 235);
+  border: 1px solid var(--main-border-color);
 }
 
 .invisible {
+  display: inline-block;
+  width: 30%;
   text-align: left;
-  width: 35.5%;
   color: transparent;
   font-size: .7rem;
-  margin-right: 15px;
   height: 1rem;
-  padding-left: 5px;
+  padding-left: 1rem;
+  margin-right: 2.5rem;
 }
 
 .visible {
+  display: inline-block;
   text-align: left;
-  width: 35.5%;
+  width: 40%;
   font-size: .7rem;
-  margin-right: 15px;
   height: 1rem;
   padding-left: 5px;
-  color: red;
+  color: rgb(220, 83, 83);
+  padding-left: 1rem;
+  margin-right: 2rem;
+}
+
+#transaction-type  {
+  margin-right: 2rem;
+  width: 10%;
+  height: 1.8rem;
+  border:1px solid var(--main-border-color);
+  color: gray;
+  background-color: white;
 }
 
 #add {
-  background-color: rgb(255, 134, 5);
-  border-color: rgb(255, 134, 5);
-  color: white;
+  width: 10%;
+  border: 2px solid rgb(255, 134, 5);
+  color: rgb(255, 134, 5);
 }
 
 ::-webkit-input-placeholder {
   color: rgb(182, 182, 182);
+  font-size: .9rem;
 }
 
 .main {
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
-  margin: auto;
   border-radius: 5px;
-  border: 1px solid rgb(255, 134, 5);
-  margin-bottom: 2rem;
+  margin: 0 auto;
+  background-color: white;
+  padding: 0 2rem 0;
+  border: 1px solid var(--main-border-color);
 }
 
 .entry-container {
   width: 50%;
 }
 
-.entry-container  h3, #h3-balance {
+#h3-income, #h3-expense, #h3-balance {
   padding: .7rem;
-  font-weight: normal;
-  color: rgb(255, 134, 5);
-  background-color: white;
-  border-bottom: 1px solid rgb(255, 134, 5);
+  color: gray;
+  border-bottom: 1px solid var(--main-border-color);
   font-size: 1rem;
 }
 
-#income-container{
-  border-right:1px solid rgb(255, 134, 5);
-}
-
-#h3-income {
+#income-container {
   border-top-left-radius: 5px;
+  border-bottom: none;
 }
 
-#h3-expense {
+#expense-container {
   border-top-right-radius: 5px;
+  border-bottom: none;
 }
 
 #income, #expense {
@@ -155,19 +163,29 @@ input, #add, select {
   text-align: right;
   background-color: white;
   overflow-y: scroll; 
-  height: 10rem;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  height: 15rem;
 }
+
+#expense {
+  border-left: 1px solid var(--main-border-color);
+}
+
+#income::-webkit-scrollbar,  #expense::-webkit-scrollbar {
+  width: 6px;
+}
+
+#income::-webkit-scrollbar-thumb, #expense::-webkit-scrollbar-thumb {
+  background-color: rgb(75, 73, 73);
+} 
 
 .added {
   line-height: 1.5rem;
   height: 1.5rem;
   display: flex;
   justify-content: space-between;
-  /* align-items: baseline; */
   color: gray;
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 
 .added span {
@@ -180,9 +198,10 @@ input, #add, select {
   width: 30%;
   text-align: left;
   font-size: .7rem;
+  font-family: 'Roboto Mono', 'monospace';
 }
 
-#name {
+#description-value {
   display: block;
   width: 30%;
   overflow: hidden;
@@ -190,12 +209,14 @@ input, #add, select {
   padding: 0 .5rem;
 }
 
-#amountSpan {
+#amount-value{
   display: block;
   width: 30%;
   padding-left: .6rem;
   text-align: right;
-  font-size: 1rem;
+  font-size: .9rem;
+  font-family: 'Roboto Mono', 'monospace';
+  color: rgb(67, 67, 67);
 }
 
 .delete {
@@ -216,47 +237,43 @@ input, #add, select {
   width: .9rem;
 }
 
-#income::-webkit-scrollbar,  #expense::-webkit-scrollbar {
-  width: 6px;
-  border-left:1px solid rgb(238, 238, 238);
+#expensetc {
+  border-left: 1px solid  var(--main-border-color);
 }
 
-#income::-webkit-scrollbar-thumb, #expense::-webkit-scrollbar-thumb {
-  background-color: rgb(75, 73, 73);
-} 
+#total {
+  color: rgb(67, 67, 67);
+  padding-right: 3rem;
+}
 
-#balance-container{
+#balance-container {
   width: 100%;
+  border-top: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-.red-balance {
-  color: red;
-}
-
 #h3-balance {
   padding: .7rem;
-  font-weight: normal;
-  color: rgb(255, 134, 5);
+  font-weight: bold;
+  color: gray;
   background-color: white;
-  border-top: 1px solid rgb(255, 134, 5);
-  border-bottom: 1px solid rgb(255, 134, 5);
+  border-top: 1px solid var(--main-border-color);
   font-size: 1rem;
 }
-
 
 .total-container {
   background-color: white;
   display: flex;
-  padding: .5rem;
-  border-top: 1px solid rgb(235, 235, 235);
+  justify-content: space-between;
   align-items: baseline;
+  padding: .5rem;
   line-height: 1rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-size: .9rem;
   color: gray;
+  font-family: 'Roboto Mono', 'monospace';
 }
 
 .total-container span {
@@ -264,139 +281,22 @@ input, #add, select {
   padding-left: .5rem;
 }
 
-.total-container button {
-  font-size: 1.3rem;
-}
-
-
 #login-container {
   width: 60%;
   margin: auto;
-  
 }
 
-#login-container h1, #login-container h3 {
-  text-align: center;
-  margin: 0;
-  width: 100%;
-  margin-top: 2rem;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+#total-balance {
+  padding-right: 3rem;
 }
 
-#login-container h3 {
-  width: 400px;
-  margin: auto;
-  margin-top: 2rem;
-  height: 5rem;
-  line-height: 3rem;
+.default-balance {
+  color: rgb(67, 67, 67);
 }
 
-.form1 {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 2rem 2rem;
-  border: 1px solid rgb(235, 235, 235);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+.red-balance {
+  color: rgb(210, 81, 81);
 }
-
-.form1 input {
-  margin: 1rem 0;
-  height: 2.5rem;
-  padding: .5rem;
-  width: 100%;
-}
-
-#login-form{
-  padding-top: 1.3rem;
-} 
-
-#login-form input {
-  margin: 0 auto;
-}
-
-p{
-  width: 70%;
-  text-align: left;
-  display: inline-block;
-  align-self: flex-start;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  color: gray;
-}
-
-#log-in, #sign-up {
-  width: 30%;
-  text-align: right;
-  display: inline-block;
-  align-self: flex-end;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  background-color: rgb(249, 249, 249);
-
-}
-
-#log-in a, #sign-up a {
-  color: rgb(255, 134, 5);
-}
-
-#log-in:hover {
-  color: lightgray;
-}
-
-#log-in:hover {
-  color: lightgray;
-}
-
-#have-account {
-  display: flex;
-  justify-content: space-between;
-}
-
-.submit-button{
-  background-color: rgb(255, 134, 5);
-  height: 2.5rem;
-  color: white;
-  margin: 2rem 0;
-}
-
-#submit-signup:disabled {
-  background-color: gray;
-}
-
-#submit-login {
-  margin-top: 1.7rem;
-}
-
-.validation-message {
-  display: none;
-  color: red;
-  font-size: .8rem;
-  height: .8rem;
-  margin-bottom: -.5rem;
-  padding-left: .3rem;
-}
-
-.helper, #wrong {
-  margin: 0 auto;
-  height: 1.8rem;
-  font-size: .7rem;
-  color: rgb(238, 113, 113, 0); 
-  width: 100%;
-  
-}
-
-#wrong{
-  font-size: .8rem;
-}
-
-.attention {
-  border: 1px solid red;
-}
-
 
 @media only screen and (max-width: 1272px){
 
@@ -420,29 +320,14 @@ p{
     margin-bottom: 0;
   }
 
-  /* .total-container{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  */
-
   .total-container span {
     width: 70%;
     text-align: right;
   }
-/* 
-  #delete-income {
-    width: 30%;
-  }
 
-  #total-income, #total-expense {
-    width: 100%;
-    text-align: right;
-  }  */
-
- input, select, #add {
+  input, select, #add {
    margin-right: 1rem;
- }
+  }
 
   main {
     display: flex;
@@ -473,9 +358,8 @@ p{
 
   #balance-container  #total-balance {
     text-align: right;
+    font-size: .9rem;
   }
-
-
 
   #balance-container .total-container {
     margin-bottom: 2rem;
@@ -518,11 +402,6 @@ p{
 
 @media only screen and (max-width: 640px){
 
-  #login-container,  #login-container h3 {
-    margin: auto;
-    width: 100%;
-  }
-
   #add {
     margin-top: 1rem;
     padding: 0 4.9rem;
@@ -535,64 +414,6 @@ p{
   #wrapper {
     width: 98%;
   }
-
-  #login-container h1{
-    margin: 1rem 0;
-  }
-}
-
-@media only screen and (max-width: 400px){
-
-  #login-container{
-    width: 100%;
-    margin: auto;
-    height: fit-content;
-    font-size: .8rem;
-  }
-
-  .form1, #login-container h3, #login-container h1 {
-    width: 100%;
-    margin: 0;
-    padding: .5rem;
-  }
-
-  #login-container h1{
-    margin: 1rem 0;
-    font-size: 1.5rem;
-  }
-
-  #login-container h3 {
-    font-size: 1rem;
-    line-height: 4rem;
-  }
-
-  .form1 input {
-    width: 90%;
-    margin: 0.5rem auto;
-    font-size: .8rem;
-  }
-
-  .submit-button {
-    width: 90%;
-    margin: 1rem auto;
-    font-size: .8rem;
-  }
-
-  #have-account {
-    width: 90%;
-    margin: auto;
-    font-size: .6rem;
-  }
-
-  #log-in-a {
-    font-size: .8rem;
-  }
-
-  .helper, #wrong{
-    width: 90%;
-  }
-
-  
 }
 
 

@@ -9,14 +9,14 @@ const EntryContainer = (props) => {
           {props.data.map(element => 
             <div key={element.id} className="added">
               <span className="dateAndTime">{element.time}</span>
-              <span id="name">{element.description}</span>
-              <span id="amountSpan">{element.amount.toFixed(2)}€</span>
+              <span id="description-value">{element.description}</span>
+              <span id="amount-value">{props.switchDotToAComma(element.amount.toFixed(2))} €</span>
               <DeleteButton value={element.id} deleteFunc={props.deleteFunc}/>
             </div>)}
         </div>
-      <div className="total-container">
+      <div className="total-container" id={props.idForTotalContainer}>
         <span>{props.total}</span>
-        <span id="total">{props.totalAmount}€</span>
+        <span id="total">{props.switchDotToAComma(props.totalAmount)} €</span>
       </div>
     </div>
   )

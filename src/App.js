@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   getAmount= (e) => {
-    if(isNaN(e.target.value) ||e.target.value < 0 ){
+    if(isNaN(e.target.value) ||e.target.value < 0 || e.target.value > 1000000000 ){
       this.setState({
         amount: '', 
         classNameAmntSpan: 'visible',
@@ -237,6 +237,29 @@ class App extends Component {
       return this.state.totalExpense.toFixed(2)
     }
   }
+  switchDotToAComma = (number) => {
+    let numStr = number.toString();
+    console.log(numStr);
+    console.log(numStr.length);
+    
+    let numWithComma = numStr.substring(0,numStr.length-3) + ',' + numStr.substring(numStr.length-2, numStr.length)
+    let thousand = numWithComma.substring(0,numWithComma.length-6) + '.' + numWithComma.substring(numWithComma.length-6,numWithComma.length);
+    console.log(thousand);
+    
+    let million = thousand.substring(0,thousand.length-10) + '.' + thousand.substring(thousand.length-10,thousand.length);
+    let billion = million.substring(0,million.length-14) + '.' + million.substring(million.length-14,million.length);
+    console.log(numWithComma);
+    
+    if (numStr.length > 12){
+      return billion
+    } else if (numStr.length > 9){
+      return million
+    } else if (numStr.length > 6){
+      return thousand
+    } else {
+      return numWithComma
+    }
+  }
 
   render() {
     return (
@@ -245,8 +268,11 @@ class App extends Component {
         <Header />
 
         <div id="input-container" >
-          <span  className={this.state.classNameDescrSpan}>Please enter description</span>
-          <span  className={this.state.classNameAmntSpan}>Please enter the right amount using numbers</span>
+          <div id="span-container">
+            <span  className={this.state.classNameDescrSpan}>Please enter the description of your entry</span>
+            <span  className={this.state.classNameAmntSpan}>Please enter the correct amount</span>
+          </div>
+          
           
           <input 
             type="text" 
@@ -284,6 +310,8 @@ class App extends Component {
           totalAmount={this.state.totalIncome.toFixed(2)}
           data={this.state.income}
           deleteFunc={this.deleteEntryIncome}
+          switchDotToAComma={this.switchDotToAComma}
+          idForTotalContainer="incometc"
           />
 
           <EntryContainer 
@@ -293,13 +321,17 @@ class App extends Component {
           totalAmount={this.addMinus()}
           data={this.state.expense}
           deleteFunc={this.deleteEntryExpense}
+          switchDotToAComma={this.switchDotToAComma}
+          idForTotalContainer="expensetc"
           />
 
           <div id="balance-container">
             <h3 id="h3-balance">Balance</h3>
             <div className="total-container">
                 <span>Total:</span>
-                <span id="total-balance" className={this.makeBalanceRed()}>{this.state.balance.toFixed(2)}€</span>
+                <span id="total-balance" className={this.makeBalanceRed()}>
+                  {this.switchDotToAComma(this.state.balance.toFixed(2))} €
+                </span>
             </div>
           </div>
 
