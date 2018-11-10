@@ -327,7 +327,7 @@ class App extends Component {
           deleteFunc={this.deleteEntryExpense}
           switchDotToAComma={this.switchDotToAComma}
           idForTotalContainer="expensetc"
-          addMinus="-"
+          addMinus={this.state.totalExpense !== 0? "-" : ""}
           />
 
           <div id="balance-container">
