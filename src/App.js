@@ -73,15 +73,19 @@ class App extends Component {
   })
   
   getDescription = (e) => {
-      this.setState({
-        description: e.target.value.toString(), 
-        classNameDescrSpan: 'invisible', 
-        classNameDescrInput: 'default'
-      })
+    this.setState({
+      description: e.target.value.toString(), 
+      classNameDescrSpan: 'invisible', 
+      classNameDescrInput: 'default'
+    })
+
+    if(e.key === 'Enter'){
+      this.amtRef.focus();
+    }
   }
 
   getAmount= (e) => {
-    if(isNaN(e.target.value) ||e.target.value < 0 || e.target.value > 1000000000 ){
+    if(isNaN(e.target.value) ||e.target.value < 0 || e.target.value > 1000000000 || e.target.value == ' '){
       this.setState({
         amount: '', 
         classNameAmntSpan: 'visible',
@@ -95,6 +99,9 @@ class App extends Component {
         classNameAmntSpan: 'invisible',
         classNameAmntInput: 'default'
       })
+    }
+    if(e.key === 'Enter'){
+      this.transRef.focus();
     }
   }
 
@@ -239,16 +246,12 @@ class App extends Component {
   }
   switchDotToAComma = (number) => {
     let numStr = number.toString();
-    console.log(numStr);
-    console.log(numStr.length);
     
     let numWithComma = numStr.substring(0,numStr.length-3) + ',' + numStr.substring(numStr.length-2, numStr.length)
     let thousand = numWithComma.substring(0,numWithComma.length-6) + '.' + numWithComma.substring(numWithComma.length-6,numWithComma.length);
-    console.log(thousand);
     
     let million = thousand.substring(0,thousand.length-10) + '.' + thousand.substring(thousand.length-10,thousand.length);
     let billion = million.substring(0,million.length-14) + '.' + million.substring(million.length-14,million.length);
-    console.log(numWithComma);
     
     if (numStr.length > 12){
       return billion
@@ -265,9 +268,10 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Header />
-
         <div id="input-container" >
+
+          <Header />
+
           <div id="span-container">
             <span  className={this.state.classNameDescrSpan}>Please enter the description of your entry</span>
             <span  className={this.state.classNameAmntSpan}>Please enter the correct amount</span>
@@ -279,7 +283,7 @@ class App extends Component {
             placeholder="Description" 
             id="description"  
             className={this.state.classNameDescrInput} 
-            onInput={(e)=>{this.getDescription(e)}} 
+            onKeyUp={(e)=>{this.getDescription(e)}} 
             ref={(input)=>{this.descRef = input}}
           />
 
@@ -288,11 +292,11 @@ class App extends Component {
             placeholder="Amount" 
             id="amount" 
             className={this.state.classNameAmntInput}
-            onInput={(e)=>{this.getAmount(e)}}
+            onKeyUp={(e)=>{this.getAmount(e)}}
             ref={(input)=>{this.amtRef = input}}
           />
 
-          <select id="transaction-type" onChange={this.getOption}>
+          <select id="transaction-type" onChange={this.getOption} ref={(input)=>{this.transRef = input}}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>

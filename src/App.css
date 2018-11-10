@@ -1,7 +1,6 @@
 :root {
-  --main-border-color: rgb(235, 235, 235);
+  --main-border-color: rgb(211, 211, 211);
 }
-
 
 * {
   box-sizing: border-box;
@@ -10,9 +9,7 @@
 
 body {
   color: rgb(69, 67, 67);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto";
 }
 
 .App {
@@ -25,7 +22,7 @@ body {
 
 header {
   width: 100%;
-  height: 7rem;
+  height: 3rem;
   display: flex;
   align-items: center;
 }
@@ -39,23 +36,27 @@ h1 {
 
 #span-container {
   width: 100%;
+  padding-right: 18%;
 }
 
 #input-container {
+  height: fit-content;
   position: relative;
   width: 85%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 1rem auto 2rem;
+  margin: 2rem auto 2rem;
   padding: 1rem 2rem 2rem;
-  border-radius: 5px;
   border: 1px solid var(--main-border-color);
+  border-radius: 5px;
+  background-color: white;
 }
 
-input, #add, select {
-  line-height: 1.7rem;
+input, #add, #transaction-type {
+  height: 2rem;
+  line-height: 2rem;
   font-size: 1rem;
   padding: 0 .5rem ;
   border-radius: 5px;
@@ -66,6 +67,10 @@ input, #add, select {
 #description, #amount {
   width: 25%;
   margin-right: 2rem;
+}
+
+#description:focus, #amount:focus {
+  box-shadow: 0 1px 1px rgb(228, 228, 228);
 }
 
 .red {
@@ -83,57 +88,67 @@ input, #add, select {
 
 .invisible {
   display: inline-block;
-  width: 30%;
-  text-align: left;
-  color: transparent;
-  font-size: .7rem;
+  width: 40%;
   height: 1rem;
   padding-left: 1rem;
   margin-right: 2.5rem;
+  text-align: left;
+  color: transparent;
+  font-size: .7rem;
 }
 
 .visible {
-  display: inline-block;
-  text-align: left;
   width: 40%;
-  font-size: .7rem;
   height: 1rem;
-  padding-left: 5px;
-  color: rgb(220, 83, 83);
+  display: inline-block;
   padding-left: 1rem;
   margin-right: 2rem;
+  text-align: left;
+  font-size: .7rem;
+  color: rgb(220, 83, 83);
 }
 
 #transaction-type  {
-  margin-right: 2rem;
   width: 10%;
-  height: 1.8rem;
-  border:1px solid var(--main-border-color);
+  height: 2rem;
   color: gray;
   background-color: white;
+  border:1px solid var(--main-border-color);
+  margin-right: 2rem;
+}
+
+
+#transaction-type:focus {
+  box-shadow: 0 1px 1px rgb(228, 228, 228);
 }
 
 #add {
-  width: 10%;
-  border: 2px solid rgb(255, 134, 5);
-  color: rgb(255, 134, 5);
+  width: 7%;
+  border: 1px solid rgb(249, 149, 43);
+  background-color: rgb(249, 149, 43);
+  color: white;
+  box-shadow: 0 2px 2px rgb(228, 228, 228);
+}
+#add:focus {
+  background-color: rgb(245, 162, 74);
+  border: 1px solid rgb(245, 162, 74);
+  box-shadow: 0 2px 2px rgb(208, 207, 207);
 }
 
 ::-webkit-input-placeholder {
-  color: rgb(182, 182, 182);
-  font-size: .9rem;
+  color: rgb(201, 201, 201);
 }
 
 .main {
   width: 85%;
   display: flex;
   flex-wrap: wrap;
-  text-align: center;
-  border-radius: 5px;
   margin: 0 auto;
-  background-color: white;
   padding: 0 2rem 0;
   border: 1px solid var(--main-border-color);
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
 }
 
 .entry-container {
@@ -142,8 +157,8 @@ input, #add, select {
 
 #h3-income, #h3-expense, #h3-balance {
   padding: .7rem;
-  color: gray;
   border-bottom: 1px solid var(--main-border-color);
+  color: gray;
   font-size: 1rem;
 }
 
@@ -158,12 +173,12 @@ input, #add, select {
 }
 
 #income, #expense {
-  font-size: 1rem;
-  padding: 1rem;
-  text-align: right;
-  background-color: white;
-  overflow-y: scroll; 
   height: 15rem;
+  padding: 1rem;
+  overflow-y: scroll; 
+  background-color: white;
+  font-size: 1rem;
+  text-align: right;
 }
 
 #expense {
@@ -179,13 +194,14 @@ input, #add, select {
 } 
 
 .added {
-  line-height: 1.5rem;
   height: 1.5rem;
   display: flex;
   justify-content: space-between;
-  color: gray;
   margin-bottom: 5px;
+  margin-right: -10px;
+  line-height: 1.5rem;
   font-size: 1rem;
+  color: gray;
 }
 
 .added span {
@@ -194,24 +210,24 @@ input, #add, select {
 }
 
 .dateAndTime {
-  display: block;
   width: 30%;
+  display: block;
   text-align: left;
   font-size: .7rem;
   font-family: 'Roboto Mono', 'monospace';
 }
 
 #description-value {
-  display: block;
   width: 30%;
+  display: block;
+  padding: 0 .5rem;
   overflow: hidden;
   text-align: right;
-  padding: 0 .5rem;
 }
 
-#amount-value{
-  display: block;
+#amount-value {
   width: 30%;
+  display: block;
   padding-left: .6rem;
   text-align: right;
   font-size: .9rem;
@@ -220,30 +236,31 @@ input, #add, select {
 }
 
 .delete {
-  outline: none;
-  border: none;
+  width: 1.5rem;
+  height: 1.3rem;
   margin: 0;
   padding: 0;
-  height: 1.3rem;
+  border: none;
   line-height: 1.3rem;
-  width: 1.5rem;
   font-size: .8rem;
+  outline: none;
   color:gray;
 }
 
 .delete svg {
-  margin-top: 2px;
-  height: .9rem;
   width: .9rem;
+  height: .9rem;
+  margin-top: 2px;
 }
+
 
 #expensetc {
   border-left: 1px solid  var(--main-border-color);
 }
 
 #total {
-  color: rgb(67, 67, 67);
-  padding-right: 3rem;
+  color: gray;
+  padding-right: 2.4rem;
 }
 
 #balance-container {
@@ -255,15 +272,14 @@ input, #add, select {
 
 #h3-balance {
   padding: .7rem;
-  font-weight: bold;
-  color: gray;
   background-color: white;
   border-top: 1px solid var(--main-border-color);
+  font-weight: bold;
+  color: gray;
   font-size: 1rem;
 }
 
 .total-container {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -272,13 +288,14 @@ input, #add, select {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-size: .9rem;
+  background-color: white;
   color: gray;
   font-family: 'Roboto Mono', 'monospace';
 }
 
 .total-container span {
-  text-align: right;
   padding-left: .5rem;
+  text-align: right;
 }
 
 #login-container {
@@ -287,7 +304,8 @@ input, #add, select {
 }
 
 #total-balance {
-  padding-right: 3rem;
+  padding-right: 2.4rem;
+  font-weight: bold;
 }
 
 .default-balance {
