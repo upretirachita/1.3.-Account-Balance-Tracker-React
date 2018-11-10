@@ -239,10 +239,8 @@ class App extends Component {
 
   addMinus= () => {
     if (this.state.totalExpense > 0) {
-      return '-' + this.state.totalExpense.toFixed(2)
-    } else {
-      return this.state.totalExpense.toFixed(2)
-    }
+      return '-' 
+    } 
   }
   switchDotToAComma = (number) => {
     let numStr = number.toString();
@@ -270,11 +268,12 @@ class App extends Component {
 
         <div id="input-container" >
 
-          <Header />
+        <Header />
 
           <div id="span-container">
             <span  className={this.state.classNameDescrSpan}>Please enter the description of your entry</span>
             <span  className={this.state.classNameAmntSpan}>Please enter the correct amount</span>
+
           </div>
           
           
@@ -316,17 +315,19 @@ class App extends Component {
           deleteFunc={this.deleteEntryIncome}
           switchDotToAComma={this.switchDotToAComma}
           idForTotalContainer="incometc"
+          addMinus=""
           />
 
           <EntryContainer 
           name='Expense'
           id='expense'
           total='Total expense:'
-          totalAmount={this.addMinus()}
+          totalAmount={this.state.totalExpense.toFixed(2)}
           data={this.state.expense}
           deleteFunc={this.deleteEntryExpense}
           switchDotToAComma={this.switchDotToAComma}
           idForTotalContainer="expensetc"
+          addMinus="-"
           />
 
           <div id="balance-container">
