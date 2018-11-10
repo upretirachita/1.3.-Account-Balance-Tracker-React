@@ -222,7 +222,7 @@ input, #add, #transaction-type {
   display: block;
   padding: 0 .5rem;
   overflow: hidden;
-  text-align: right;
+  text-align: left;
 }
 
 #amount-value {
