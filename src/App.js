@@ -244,21 +244,41 @@ class App extends Component {
   }
   switchDotToAComma = (number) => {
     let numStr = number.toString();
+    console.log(numStr);
     
-    let numWithComma = numStr.substring(0,numStr.length-3) + ',' + numStr.substring(numStr.length-2, numStr.length)
-    let thousand = numWithComma.substring(0,numWithComma.length-6) + '.' + numWithComma.substring(numWithComma.length-6,numWithComma.length);
     
-    let million = thousand.substring(0,thousand.length-10) + '.' + thousand.substring(thousand.length-10,thousand.length);
-    let billion = million.substring(0,million.length-14) + '.' + million.substring(million.length-14,million.length);
-    
-    if (numStr.length > 12){
-      return billion
-    } else if (numStr.length > 9){
-      return million
-    } else if (numStr.length > 6){
-      return thousand
+    if(numStr[0] !== '-'){
+      let numWithComma = numStr.substring(0,numStr.length-3) + ',' + numStr.substring(numStr.length-2, numStr.length)
+      let thousand = numWithComma.substring(0,numWithComma.length-6) + '.' + numWithComma.substring(numWithComma.length-6,numWithComma.length);
+      
+      let million = thousand.substring(0,thousand.length-10) + '.' + thousand.substring(thousand.length-10,thousand.length);
+      let billion = million.substring(0,million.length-14) + '.' + million.substring(million.length-14,million.length);
+      
+      if (numStr.length > 12){
+        return billion
+      } else if (numStr.length > 9){
+        return million
+      } else if (numStr.length > 6){
+        return thousand
+      } else {
+        return numWithComma
+      }
     } else {
-      return numWithComma
+      let numWithComma = numStr.substring(0,numStr.length-3) + ',' + numStr.substring(numStr.length-2, numStr.length)
+      let thousand = numWithComma.substring(0,numWithComma.length-6) + '.' + numWithComma.substring(numWithComma.length-6,numWithComma.length);
+      
+      let million = thousand.substring(0,thousand.length-10) + '.' + thousand.substring(thousand.length-10,thousand.length);
+      let billion = million.substring(0,million.length-14) + '.' + million.substring(million.length-14,million.length);
+      
+      if (numStr.length > 13){
+        return billion
+      } else if (numStr.length > 10){
+        return million
+      } else if (numStr.length > 7){
+        return thousand
+      } else {
+        return numWithComma
+      }
     }
   }
 
