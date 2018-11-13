@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import EntryContainer from './components/EntryContainer';
+import Balance from './components/BalanceContainer'
 
 // ********************************* HELPER FUNCTIONS *********************************
 
@@ -128,8 +129,7 @@ class App extends Component {
       });
 
       putInLocalStorage( newIncome, 'income');
-    
-
+  
     } else if (this.state.field === 'expense' && this.state.amount !== '' && this.state.description !== '') {
 
       let newExpense = [
@@ -194,7 +194,7 @@ class App extends Component {
         totalIncome: this.state.totalIncome - deletedIncome, 
         balance: this.state.totalIncome - this.state.totalExpense - deletedIncome 
       })
-
+      
       putInLocalStorage(newIncome, 'income');
     }
   }
@@ -249,6 +249,7 @@ class App extends Component {
       } else {
         return numWithComma
       }
+
     } else {
      
       if (numStr.length > 13){
@@ -306,15 +307,11 @@ class App extends Component {
           addMinus={this.state.totalExpense !== 0? "-" : ""}
           />
 
-          <div id="balance-container">
-            <h3 id="h3-balance">Balance</h3>
-            <div className="total-container">
-                <span>Total:</span>
-                <span id="total-balance" className={this.makeBalanceRed()}>
-                  {this.switchDotToAComma(this.state.balance.toFixed(2))} €
-                </span>
-            </div>
-          </div>
+          <Balance 
+            makeBalanceRed={this.makeBalanceRed}
+            switchDotToAComma={this.switchDotToAComma}
+            balance={this.state.balance}
+          />
 
         </main>
 
