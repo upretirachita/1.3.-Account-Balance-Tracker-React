@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import WebFont from 'webfontloader';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import WebFont from "webfontloader";
+import App from "./App";
 
 WebFont.load({
   google: {
-    families: ['Roboto Mono', 'monospace']
+    families: ["Roboto Mono", "monospace"]
   }
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById("root"));

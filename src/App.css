@@ -1,5 +1,7 @@
 :root {
   --main-border-color: rgb(211, 211, 211);
+  --main-background-color: rgb(241, 241, 241);
+  --main-text-color: rgb(53, 53, 53);
 }
 
 * {
@@ -32,106 +34,160 @@ h1 {
   color: gray;
   width: 100%;
   font-size: 2rem;
-}
-
-#span-container {
-  width: 100%;
-  padding-right: 18%;
+  margin: 1rem 0 1.5rem;
 }
 
 #input-container {
   height: fit-content;
-  position: relative;
-  width: 85%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto 2rem;
+  margin: 0 auto 2rem;
   padding: 1rem 2rem 2rem;
-  border: 1px solid var(--main-border-color);
-  border-radius: 5px;
+  border-bottom: 1px solid transparent;
+  border-radius: 2px;
   background-color: white;
 }
 
-input, #add, #transaction-type {
-  height: 2rem;
-  line-height: 2rem;
+input,
+#add {
   font-size: 1rem;
-  padding: 0 .5rem ;
-  border-radius: 5px;
+  border-radius: 2px;
   border: none;
   outline: none;
+  line-height: 1rem;
 }
 
-#description, #amount {
+#description,
+#amount {
   width: 25%;
-  margin-right: 2rem;
+  margin-right: 0.5rem;
+  padding: 1rem 1.5rem;
 }
 
-#description:focus, #amount:focus {
-  box-shadow: 0 1px 1px rgb(228, 228, 228);
+.default {
+  background: var(--main-background-color);
+  color: rgb(53, 53, 53);
+  padding: 24px 8px;
+  border-bottom: 2px solid transparent;
+}
+
+.default:focus {
+  border-bottom: 2px solid rgb(69, 69, 69);
 }
 
 .red {
-  border: 1px solid rgb(210, 81, 81);
+  border-bottom: 2px solid rgb(252, 55, 55);
+  background: var(--main-background-color);
 }
 
 #span-container {
-  width: 80%;
-  margin: 0 10%;
-}
-
-.default{
-  border: 1px solid var(--main-border-color);
+  width: 100%;
+  padding-left: 15.5%;
 }
 
 .invisible {
+  width: 29.33%;
+  padding: 0.5rem;
   display: inline-block;
-  width: 40%;
-  height: 1rem;
   padding-left: 1rem;
-  margin-right: 2.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 5px;
   text-align: left;
+  font-size: 0.7rem;
   color: transparent;
-  font-size: .7rem;
 }
 
 .visible {
-  width: 40%;
-  height: 1rem;
+  width: 29.5%;
+  padding: 0.5rem;
   display: inline-block;
   padding-left: 1rem;
-  margin-right: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 5px;
   text-align: left;
-  font-size: .7rem;
-  color: rgb(220, 83, 83);
+  font-size: 0.7rem;
+  color: rgb(255, 255, 255);
+  background: rgb(74, 74, 74);
+  position: relative;
+  box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.697);
+  border-radius: 2px;
 }
 
-#transaction-type  {
-  width: 10%;
-  height: 2rem;
-  color: gray;
-  background-color: white;
-  border:1px solid var(--main-border-color);
-  margin-right: 2rem;
+.visible::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 6px solid rgb(74, 74, 74);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  top: 28px;
+  left: 10px;
 }
 
+/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1.5rem;
+}
 
-#transaction-type:focus {
-  box-shadow: 0 1px 1px rgb(228, 228, 228);
+.custom-dropdown select {
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
+  font-size: 1rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  outline: none;
+  border: 1px solid var(--main-background-color);
+  border-radius: 2px;
+  /*Hiding the select arrow for firefox*/
+  -moz-appearance: none;
+  /*Hiding the select arrow for chrome*/
+  -webkit-appearance: none;
+  /*Hiding the select arrow default implementation*/
+  appearance: none;
+}
+/*Hiding the select arrow for IE10*/
+.custom-dropdown select::-ms-expand {
+  display: none;
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after {
+  /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: 0.625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -0.5em;
 }
 
 #add {
-  width: 7%;
-  border: 1px solid rgb(249, 149, 43);
-  background-color: rgb(249, 149, 43);
+  padding: 17px 1.5rem;
+  background-color: rgb(81, 210, 134);
   color: white;
   box-shadow: 0 2px 2px rgb(228, 228, 228);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.01px;
 }
-#add:focus {
-  background-color: rgb(245, 162, 74);
-  border: 1px solid rgb(245, 162, 74);
+#add:active {
+  background-color: rgb(60, 175, 108);
   box-shadow: 0 2px 2px rgb(208, 207, 207);
 }
 
@@ -140,13 +196,12 @@ input, #add, #transaction-type {
 }
 
 .main {
-  width: 85%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  padding: 0 2rem 0;
   border: 1px solid var(--main-border-color);
-  border-radius: 5px;
+  border-radius: 2px;
   background-color: white;
   text-align: center;
 }
@@ -155,8 +210,10 @@ input, #add, #transaction-type {
   width: 50%;
 }
 
-#h3-income, #h3-expense, #h3-balance {
-  padding: .7rem;
+#h3-income,
+#h3-expense,
+#h3-balance {
+  padding: 1rem;
   border-bottom: 1px solid var(--main-border-color);
   color: gray;
   font-size: 1rem;
@@ -172,10 +229,11 @@ input, #add, #transaction-type {
   border-bottom: none;
 }
 
-#income, #expense {
-  height: 15rem;
-  padding: 1rem;
-  overflow-y: scroll; 
+#income,
+#expense {
+  height: 12rem;
+  padding: 2rem;
+  overflow-y: scroll;
   background-color: white;
   font-size: 1rem;
   text-align: right;
@@ -185,16 +243,18 @@ input, #add, #transaction-type {
   border-left: 1px solid var(--main-border-color);
 }
 
-#income::-webkit-scrollbar,  #expense::-webkit-scrollbar {
+#income::-webkit-scrollbar,
+#expense::-webkit-scrollbar {
   width: 6px;
 }
 
-#income::-webkit-scrollbar-thumb, #expense::-webkit-scrollbar-thumb {
+#income::-webkit-scrollbar-thumb,
+#expense::-webkit-scrollbar-thumb {
   background-color: rgb(75, 73, 73);
-} 
+}
 
 .added {
-  height: 1.5rem;
+  height: 2rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
@@ -213,14 +273,14 @@ input, #add, #transaction-type {
   width: 30%;
   display: block;
   text-align: left;
-  font-size: .7rem;
-  font-family: 'Roboto Mono', 'monospace';
+  font-size: 0.7rem;
+  font-family: "Roboto Mono", "monospace";
 }
 
 #description-value {
   width: 30%;
   display: block;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   overflow: hidden;
   text-align: left;
 }
@@ -228,10 +288,10 @@ input, #add, #transaction-type {
 #amount-value {
   width: 30%;
   display: block;
-  padding-left: .6rem;
+  padding-left: 0.6rem;
   text-align: right;
-  font-size: .9rem;
-  font-family: 'Roboto Mono', 'monospace';
+  font-size: 0.9rem;
+  font-family: "Roboto Mono", "monospace";
   color: rgb(67, 67, 67);
 }
 
@@ -242,25 +302,30 @@ input, #add, #transaction-type {
   padding: 0;
   border: none;
   line-height: 1.3rem;
-  font-size: .8rem;
+  font-size: 0.8rem;
   outline: none;
-  color:gray;
+  color: gray;
 }
 
 .delete svg {
-  width: .9rem;
-  height: .9rem;
+  width: 0.9rem;
+  height: 0.9rem;
   margin-top: 2px;
 }
-
+#incometc {
+  border-top: 1px solid var(--main-border-color);
+}
 
 #expensetc {
-  border-left: 1px solid  var(--main-border-color);
+  border-left: 1px solid var(--main-border-color);
+  border-radius: 0;
+  border-top: 1px solid var(--main-border-color);
 }
 
 #total {
   color: gray;
-  padding-right: 2.4rem;
+  padding-right: 2rem;
+  font-family: "Roboto Mono", "monospace";
 }
 
 #balance-container {
@@ -271,7 +336,6 @@ input, #add, #transaction-type {
 }
 
 #h3-balance {
-  padding: .7rem;
   background-color: white;
   border-top: 1px solid var(--main-border-color);
   font-weight: bold;
@@ -283,18 +347,16 @@ input, #add, #transaction-type {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: .5rem;
+  padding: 1rem 2rem;
   line-height: 1rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   background-color: white;
   color: gray;
-  font-family: 'Roboto Mono', 'monospace';
 }
 
 .total-container span {
-  padding-left: .5rem;
   text-align: right;
 }
 
@@ -304,8 +366,9 @@ input, #add, #transaction-type {
 }
 
 #total-balance {
-  padding-right: 2.4rem;
+  padding-right: 2rem;
   font-weight: bold;
+  font-family: "Roboto Mono", "monospace";
 }
 
 .default-balance {
@@ -316,24 +379,21 @@ input, #add, #transaction-type {
   color: rgb(210, 81, 81);
 }
 
-@media only screen and (max-width: 1272px){
-
-  h1{
+@media only screen and (max-width: 1272px) {
+  h1 {
     width: 42%;
   }
 
-  #input-container{
+  #input-container {
     width: 57%;
   }
 
   #balance-container h3 {
     border-top-right-radius: 0;
   }
-
 }
-@media only screen and (max-width: 1087px){
-
-  h1{
+@media only screen and (max-width: 1087px) {
+  h1 {
     width: 100%;
     margin-bottom: 0;
   }
@@ -343,8 +403,10 @@ input, #add, #transaction-type {
     text-align: right;
   }
 
-  input, select, #add {
-   margin-right: 1rem;
+  input,
+  select,
+  #add {
+    margin-right: 1rem;
   }
 
   main {
@@ -352,7 +414,8 @@ input, #add, #transaction-type {
     flex-wrap: wrap;
   }
 
-  #income-container, #expense-container{
+  #income-container,
+  #expense-container {
     width: 50%;
   }
 
@@ -372,11 +435,11 @@ input, #add, #transaction-type {
 
   #balance-container .total-container span {
     text-align: left;
-  }  
+  }
 
-  #balance-container  #total-balance {
+  #balance-container #total-balance {
     text-align: right;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   #balance-container .total-container {
@@ -384,17 +447,20 @@ input, #add, #transaction-type {
   }
 }
 
-@media only screen and (max-width: 800px){
-
+@media only screen and (max-width: 800px) {
   #wrapper {
     width: 95%;
   }
 
-  input, select, #add {
+  input,
+  select,
+  #add {
     margin-right: 0;
   }
 
-  #income-container, #expense-container,#input-container  {
+  #income-container,
+  #expense-container,
+  #input-container {
     width: 100%;
   }
 
@@ -403,29 +469,31 @@ input, #add, #transaction-type {
     border-top-left-radius: 5px;
   }
 
-  #expense-container  h3 ,#input-container h3 {
+  #expense-container h3,
+  #input-container h3 {
     border-radius: 0;
   }
 }
 
-@media only screen and (max-width: 660px){
-  h1{
+@media only screen and (max-width: 660px) {
+  h1 {
     text-align: center;
   }
 
-  #input-container{
+  #input-container {
     flex-wrap: wrap;
   }
 }
 
-@media only screen and (max-width: 640px){
-
+@media only screen and (max-width: 640px) {
   #add {
     margin-top: 1rem;
     padding: 0 4.9rem;
   }
 
-  input, select, #add {
+  input,
+  select,
+  #add {
     width: 48%;
   }
 
@@ -433,5 +501,3 @@ input, #add, #transaction-type {
     width: 98%;
   }
 }
-
-
