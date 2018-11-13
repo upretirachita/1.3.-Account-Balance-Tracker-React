@@ -60,9 +60,14 @@ input,
   line-height: 1rem;
 }
 
-#description,
+#description {
+  width: 42.1%;
+  margin-right: 0.5rem;
+  padding: 1rem 1.5rem;
+}
+
 #amount {
-  width: 25%;
+  width: 20%;
   margin-right: 0.5rem;
   padding: 1rem 1.5rem;
 }
@@ -196,7 +201,7 @@ input,
 }
 
 .main {
-  width: 90%;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -254,7 +259,7 @@ input,
 }
 
 .added {
-  height: 2rem;
+  height: 1.5rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
@@ -305,6 +310,7 @@ input,
   font-size: 0.8rem;
   outline: none;
   color: gray;
+  text-align: left;
 }
 
 .delete svg {
@@ -324,7 +330,6 @@ input,
 
 #total {
   color: gray;
-  padding-right: 2rem;
   font-family: "Roboto Mono", "monospace";
 }
 
@@ -366,7 +371,6 @@ input,
 }
 
 #total-balance {
-  padding-right: 2rem;
   font-weight: bold;
   font-family: "Roboto Mono", "monospace";
 }
