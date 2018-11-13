@@ -80,13 +80,13 @@ class App extends Component {
       classNameDescrInput: 'default'
     })
 
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter') {
       this.amtRef.focus();
     }
   }
 
   getAmount= (e) => {
-    if(isNaN(e.target.value) ||e.target.value < 0 || e.target.value > 1000000000 || e.target.value === ' '){
+    if(isNaN(e.target.value) ||e.target.value < 0 || e.target.value > 1000000000 || e.target.value === ' ') {
       this.setState({
         amount: '', 
         classNameAmntSpan: 'visible',
@@ -100,15 +100,14 @@ class App extends Component {
         classNameAmntInput: 'default'
       })
     }
-    
   }
 
-  getOption = (e) => {
+  getTransactionType = (e) => {
     this.setState({field: e.target.value})
   }
 
   addEntry = () => {
-    if(this.state.field === 'income' && this.state.amount !== '' && this.state.description !== ''){
+    if(this.state.field === 'income' && this.state.amount !== '' && this.state.description !== '') {
 
       let newIncome = [
         ...this.state.income, {
@@ -194,7 +193,7 @@ class App extends Component {
         totalIncome: this.state.totalIncome - deletedIncome, 
         balance: this.state.totalIncome - this.state.totalExpense - deletedIncome 
       })
-      
+
       putInLocalStorage(newIncome, 'income');
     }
   }
@@ -275,7 +274,7 @@ class App extends Component {
         getDescription={this.getDescription} 
         classNameAmntInput={this.state.classNameAmntInput}
         getAmount={this.getAmount}
-        getOption={this.getOption}
+        getTransactionType={this.getTransactionType}
         addEntry={this.addEntry}
         description={this.state.description}
         amount={this.state.amount}
