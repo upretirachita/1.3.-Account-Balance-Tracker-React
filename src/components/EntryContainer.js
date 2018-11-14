@@ -24,7 +24,7 @@ const EntryContainer = props => {
       <div className="total-container" id={props.idForTotalContainer}>
         <span>{props.total}</span>
         <span id="total">
-          {(props.name === "Expense" ? "-" : "") +
+          {(props.name === "Expense" && props.totalAmount > 0 ? "-" : "") +
             props.beautifyNumber(props.totalAmount)}{" "}
           €
         </span>

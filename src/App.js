@@ -7,9 +7,8 @@ import "./App.css";
 // *************** TO DO ******************
 //  - combine delete entry function
 //  - add edit function
-//  - improve input validation with components
+//  - make tooltips with components
 //  - use reduce in calculating balance
-//  - use tooltips to explain the input fields
 //  - add prop types
 // ********************************* HELPER FUNCTIONS *********************************
 
@@ -82,14 +81,18 @@ class App extends Component {
   };
 
   getDescription = e => {
-    this.setState({
-      description: e.target.value.toString(),
-      classNameDescrSpan: "invisible",
-      classNameDescrInput: "default"
-    });
-
-    if (e.key === "Enter") {
-      this.amtRef.focus();
+    if (e.target.value.length <= 13) {
+      this.setState({
+        description: e.target.value.toString(),
+        classNameDescrSpan: "invisible",
+        classNameDescrInput: "default"
+      });
+    } else {
+      this.setState({
+        description: "",
+        classNameDescrSpan: "visibleDescr",
+        classNameDescrInput: "red"
+      });
     }
   };
 
@@ -103,7 +106,7 @@ class App extends Component {
     ) {
       this.setState({
         amount: "",
-        classNameAmntSpan: "visible",
+        classNameAmntSpan: "visibleAmnt",
         classNameAmntInput: "red"
       });
     } else {
@@ -177,14 +180,14 @@ class App extends Component {
       });
     } else if (this.state.amount !== "" && this.state.description === "") {
       this.setState({
-        classNameDescrSpan: "visible",
+        classNameDescrSpan: "visibleDescr",
         classNameDescrInput: "red"
       });
     } else {
       this.setState({
-        classNameDescrSpan: "visible",
+        classNameDescrSpan: "visibleDescr",
         classNameDescrInput: "red",
-        classNameAmntSpan: "visible",
+        classNameAmntSpan: "visibleAmnt",
         classNameAmntInput: "red"
       });
     }

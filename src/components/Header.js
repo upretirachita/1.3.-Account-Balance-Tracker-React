@@ -7,11 +7,12 @@ const Header = props => {
         <h1>Account Balance Tracker</h1>
 
         <div id="span-container">
-          <span className={props.classNameDescrSpan}>
-            Please enter the description of your entry
+          <span id="description-message" className={props.classNameDescrSpan}>
+            Please enter the description of your entry (max 13 charecters)
           </span>
-          <span className={props.classNameAmntSpan}>
-            Please enter the correct amount
+          <span id="amount-message" className={props.classNameAmntSpan}>
+            Please enter the correct amount (using numbers and dot only, max. 9
+            digits)
           </span>
         </div>
 
