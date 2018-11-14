@@ -35,7 +35,7 @@ const Header = props => {
           onChange={e => {
             props.getAmount(e);
           }}
-          value={props.amount}
+          value={props.amountInput}
         />
         <span className="custom-dropdown">
           <select onChange={props.getTransactionType}>

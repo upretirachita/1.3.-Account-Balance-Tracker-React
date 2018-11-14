@@ -72,6 +72,7 @@ class App extends Component {
     balance: lsTotalIncome - lsTotalExpense,
     description: "", // user input
     amount: "", // user input
+    amountInput: "",
     typeOfEntry: "income", // selection 'income' or 'expense'
     classNameDescrSpan: "invisible", // opposite is 'visibleDescr'
     classNameAmntSpan: "invisible", // opposite is 'visibleAmnt'
@@ -104,12 +105,14 @@ class App extends Component {
       e.target.value === " "
     ) {
       this.setState({
+        amountInput: "",
         amount: "",
         classNameAmntSpan: "visibleAmnt",
         classNameAmntInput: "red"
       });
     } else {
       this.setState({
+        amountInput: e.target.value,
         amount: parseFloat(e.target.value),
         classNameAmntSpan: "invisible",
         classNameAmntInput: "default"
@@ -139,6 +142,7 @@ class App extends Component {
 
       this.setState({
         income: newIncome,
+        amountInput: "",
         amount: "",
         amField: "",
         description: "",
@@ -164,6 +168,7 @@ class App extends Component {
 
       this.setState({
         expense: newExpense,
+        amountInput: "",
         amount: "",
         amField: "",
         description: "",
@@ -284,7 +289,7 @@ class App extends Component {
           getTransactionType={this.getTransactionType}
           addEntry={this.addEntry}
           description={this.state.description}
-          amount={this.state.amount}
+          amountInput={this.state.amountInput}
         />
 
         <main className="main">
