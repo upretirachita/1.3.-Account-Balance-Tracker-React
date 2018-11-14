@@ -9,7 +9,12 @@ const EntryContainer = props => {
       <div id={props.id}>
         {props.data.map(element => (
           <div key={element.id + "entry"} className="added">
-            <DeleteButton value={element.id} deleteFunc={props.deleteFunc} />
+            <DeleteButton
+              value={element.id}
+              deleteEntry={props.deleteEntry}
+              array={props.data}
+              incomeOrExpense={props.id}
+            />
             <span className="dateAndTime">{element.time}</span>
             <span id="description-value">{element.description}</span>
             <span id="amount-value">

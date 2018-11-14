@@ -5,7 +5,7 @@ const DeleteButton = props => {
     <button
       className="delete"
       onClick={e => {
-        props.deleteFunc(props.value);
+        props.deleteEntry(props.value, props.array, props.incomeOrExpense);
       }}
     >
       <svg

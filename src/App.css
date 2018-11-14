@@ -34,7 +34,7 @@ h1 {
   color: gray;
   width: 100%;
   font-size: 2rem;
-  margin: 1rem 0 1.5rem;
+  margin: 1rem 0 1rem;
 }
 
 #input-container {
@@ -298,7 +298,7 @@ input,
 }
 
 .dateAndTime {
-  width: 30%;
+  width: 25%;
   display: block;
   text-align: left;
   font-size: 0.7rem;
@@ -306,7 +306,7 @@ input,
 }
 
 #description-value {
-  width: 30%;
+  width: 35%;
   display: block;
   padding: 0 0.5rem;
   overflow: hidden;

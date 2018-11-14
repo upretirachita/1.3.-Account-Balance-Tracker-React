@@ -8,7 +8,7 @@ const Header = props => {
 
         <div id="span-container">
           <span id="description-message" className={props.classNameDescrSpan}>
-            Please enter the description of your entry (max 13 charecters)
+            Please enter the description of your entry (max 17 charecters)
           </span>
           <span id="amount-message" className={props.classNameAmntSpan}>
             Please enter the correct amount (using numbers and dot only, max. 9

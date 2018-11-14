@@ -5,7 +5,6 @@ import Balance from "./components/BalanceContainer";
 import "./App.css";
 
 // *************** TO DO ******************
-//  - combine delete entry function
 //  - add edit function
 //  - make tooltips with components
 //  - use reduce in calculating balance
@@ -73,15 +72,15 @@ class App extends Component {
     balance: lsTotalIncome - lsTotalExpense,
     description: "", // user input
     amount: "", // user input
-    field: "income", // selection 'income' or 'expense'
-    classNameDescrSpan: "invisible", // opposite is 'visible'
-    classNameAmntSpan: "invisible", // opposite is 'visible'
+    typeOfEntry: "income", // selection 'income' or 'expense'
+    classNameDescrSpan: "invisible", // opposite is 'visibleDescr'
+    classNameAmntSpan: "invisible", // opposite is 'visibleAmnt'
     classNameDescrInput: "default", // opposite is 'red'
     classNameAmntInput: "default" // opposite is 'red'
   };
 
   getDescription = e => {
-    if (e.target.value.length <= 13) {
+    if (e.target.value.length <= 17) {
       this.setState({
         description: e.target.value.toString(),
         classNameDescrSpan: "invisible",
@@ -119,12 +118,12 @@ class App extends Component {
   };
 
   getTransactionType = e => {
-    this.setState({ field: e.target.value });
+    this.setState({ typeOfEntry: e.target.value });
   };
 
   addEntry = () => {
     if (
-      this.state.field === "income" &&
+      this.state.typeOfEntry === "income" &&
       this.state.amount !== "" &&
       this.state.description !== ""
     ) {
@@ -149,7 +148,7 @@ class App extends Component {
 
       putInLocalStorage(newIncome, "income");
     } else if (
-      this.state.field === "expense" &&
+      this.state.typeOfEntry === "expense" &&
       this.state.amount !== "" &&
       this.state.description !== ""
     ) {
@@ -192,49 +191,40 @@ class App extends Component {
       });
     }
   };
-
-  deleteEntryIncome = id => {
+  deleteEntry = (id, array, incomeOrExpense) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-      let deletedIncome;
-
-      let newIncome = this.state.income.filter(income => {
-        if (!income.id.includes(id)) {
-          return income;
+      let deletedEntryAmount;
+      let newArray = array.filter(object => {
+        if (!object.id.includes(id)) {
+          return object;
         } else {
-          deletedIncome = income.amount;
+          deletedEntryAmount = object.amount;
         }
       });
 
-      this.setState({
-        income: newIncome,
-        totalIncome: this.state.totalIncome - deletedIncome,
-        balance:
-          this.state.totalIncome - this.state.totalExpense - deletedIncome
-      });
+      if (incomeOrExpense === "income") {
+        this.setState({
+          income: newArray,
+          totalIncome: this.state.totalIncome - deletedEntryAmount,
+          balance:
+            this.state.totalIncome -
+            this.state.totalExpense -
+            deletedEntryAmount
+        });
 
-      putInLocalStorage(newIncome, "income");
-    }
-  };
+        putInLocalStorage(newArray, "income");
+      } else {
+        this.setState({
+          expense: newArray,
+          totalExpense: this.state.totalExpense - deletedEntryAmount,
+          balance:
+            this.state.totalIncome -
+            this.state.totalExpense +
+            deletedEntryAmount
+        });
 
-  deleteEntryExpense = id => {
-    if (window.confirm("Are you sure you want to delete this entry?")) {
-      let deletedExpense;
-
-      let newExpense = this.state.expense.filter(expense => {
-        if (!expense.id.includes(id)) {
-          return expense;
-        } else {
-          deletedExpense = expense.amount;
-        }
-      });
-      this.setState({
-        expense: newExpense,
-        totalExpense: this.state.totalExpense - deletedExpense,
-        balance:
-          this.state.totalIncome - this.state.totalExpense + deletedExpense
-      });
-
-      putInLocalStorage(newExpense, "expense");
+        putInLocalStorage(newArray, "expense");
+      }
     }
   };
   // adds dot to thousand, million etc..
@@ -304,7 +294,7 @@ class App extends Component {
             total="Total income:"
             totalAmount={this.state.totalIncome.toFixed(2)}
             data={this.state.income}
-            deleteFunc={this.deleteEntryIncome}
+            deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
             idForTotalContainer="incometc"
           />
@@ -315,7 +305,7 @@ class App extends Component {
             total="Total expense:"
             totalAmount={this.state.totalExpense.toFixed(2)}
             data={this.state.expense}
-            deleteFunc={this.deleteEntryExpense}
+            deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
             idForTotalContainer="expensetc"
           />
