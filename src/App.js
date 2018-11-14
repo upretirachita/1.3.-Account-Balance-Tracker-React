@@ -81,7 +81,7 @@ class App extends Component {
   };
 
   getDescription = e => {
-    if (e.target.value.length <= 17) {
+    if (e.target.value.length <= 16) {
       this.setState({
         description: e.target.value.toString(),
         classNameDescrSpan: "invisible",
@@ -199,12 +199,15 @@ class App extends Component {
   deleteEntry = (id, array, incomeOrExpense) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
       let deletedEntryAmount;
+
       let newArray = array.filter(object => {
+        let result;
         if (!object.id.includes(id)) {
-          return object;
+          result = object;
         } else {
           deletedEntryAmount = object.amount;
         }
+        return result;
       });
 
       if (incomeOrExpense === "income") {

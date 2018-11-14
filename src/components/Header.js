@@ -1,19 +1,36 @@
 import React from "react";
+import Tooltip from "./Tooltip";
 
 const Header = props => {
+  let bla;
+  if (props.classNameDescrSpan === "visibleDescr") {
+    bla = (
+      <Tooltip
+        id="description-message"
+        className={props.classNameDescrSpan}
+        text="Please enter the description of your entry (max 16 charecters)"
+      />
+    );
+  }
+
+  let bla2;
+  if (props.classNameAmntSpan === "visibleAmnt") {
+    bla2 = (
+      <Tooltip
+        id="amount-message"
+        className={props.classNameAmntSpan}
+        text="Please enter the correct amount (using numbers and dot only, max. 9 digits)"
+      />
+    );
+  }
+
   return (
     <header>
       <div id="input-container">
         <h1>Account Balance Tracker</h1>
 
         <div id="span-container">
-          <span id="description-message" className={props.classNameDescrSpan}>
-            Please enter the description of your entry (max 17 charecters)
-          </span>
-          <span id="amount-message" className={props.classNameAmntSpan}>
-            Please enter the correct amount (using numbers and dot only, max. 9
-            digits)
-          </span>
+          {bla} {bla2}
         </div>
 
         <input
