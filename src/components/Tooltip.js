@@ -4,7 +4,7 @@ import "./Tooltip.css";
 
 const Tooltip = props => {
   return (
-    <span id={props.id} className={props.className}>
+    <span id={props.id} className="visible">
       {props.text}
     </span>
   );
@@ -14,6 +14,5 @@ export default Tooltip;
 
 Tooltip.propTypes = {
   id: PropTypes.string,
-  className: PropTypes.string,
   text: PropTypes.string
 };

@@ -28,7 +28,7 @@ const EntryContainer = props => {
         ))}
       </div>
 
-      <div className="total-container" id={props.idForTotalContainer}>
+      <div className="total-container" id={props.totalContainerId}>
         <span>{props.total}</span>
         <span id="total">
           {(props.name === "Expense" && props.totalAmount > 0 ? "-" : "") +

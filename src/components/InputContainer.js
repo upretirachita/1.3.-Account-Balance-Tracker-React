@@ -8,22 +8,20 @@ import AddButton from "./AddButton";
 
 const Header = props => {
   let descriptionSpan;
-  if (props.classNameDescrSpan === "visibleDescr") {
+  if (!props.descriptionValid) {
     descriptionSpan = (
       <Tooltip
         id="description-message"
-        className={props.classNameDescrSpan}
-        text="Please enter the description of your entry (max 16 charecters)"
+        text="Please enter the description of your entry (max 17 charecters)"
       />
     );
   }
 
   let amountSpan;
-  if (props.classNameAmntSpan === "visibleAmnt") {
+  if (!props.amountValid) {
     amountSpan = (
       <Tooltip
         id="amount-message"
-        className={props.classNameAmntSpan}
         text="Please enter the correct amount (using numbers and dot only, max. 9 digits)"
       />
     );
@@ -40,7 +38,7 @@ const Header = props => {
         type="text"
         placeholder="Description"
         id="description"
-        className={props.classNameDescrInput}
+        className={props.descriptionValid ? "default" : "red"}
         getValue={props.getDescription}
         inputValue={props.description}
       />
@@ -49,7 +47,7 @@ const Header = props => {
         type="text"
         placeholder="Amount"
         id="amount"
-        className={props.classNameAmntInput}
+        className={props.amountValid ? "default" : "red"}
         getValue={props.getAmount}
         inputValue={props.amountInput}
       />

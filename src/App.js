@@ -7,7 +7,6 @@ import "./App.css";
 // *************** TO DO ******************
 //  - add edit function
 //  - use reduce in calculating balance
-//  - add prop types
 // ********************************* HELPER FUNCTIONS *********************************
 
 function numbersWithZero(number) {
@@ -73,24 +72,20 @@ class App extends Component {
     amount: "", // user input
     amountInput: "",
     typeOfEntry: "income", // selection 'income' or 'expense'
-    classNameDescrSpan: "invisible", // opposite is 'visibleDescr'
-    classNameAmntSpan: "invisible", // opposite is 'visibleAmnt'
-    classNameDescrInput: "default", // opposite is 'red'
-    classNameAmntInput: "default" // opposite is 'red'
+    descriptionValid: true,
+    amountValid: true
   };
 
   getDescription = e => {
-    if (e.target.value.length <= 16) {
+    if (e.target.value.length <= 17) {
       this.setState({
         description: e.target.value.toString(),
-        classNameDescrSpan: "invisible",
-        classNameDescrInput: "default"
+        descriptionValid: true
       });
     } else {
       this.setState({
         description: "",
-        classNameDescrSpan: "visibleDescr",
-        classNameDescrInput: "red"
+        descriptionValid: false
       });
     }
   };
@@ -106,15 +101,13 @@ class App extends Component {
       this.setState({
         amountInput: "",
         amount: "",
-        classNameAmntSpan: "visibleAmnt",
-        classNameAmntInput: "red"
+        amountValid: false
       });
     } else {
       this.setState({
         amountInput: e.target.value,
         amount: parseFloat(e.target.value),
-        classNameAmntSpan: "invisible",
-        classNameAmntInput: "default"
+        amountValid: true
       });
     }
   };
@@ -143,7 +136,6 @@ class App extends Component {
         income: newIncome,
         amountInput: "",
         amount: "",
-        amField: "",
         description: "",
         totalIncome: this.state.totalIncome + this.state.amount,
         balance: this.state.balance + this.state.amount
@@ -169,7 +161,6 @@ class App extends Component {
         expense: newExpense,
         amountInput: "",
         amount: "",
-        amField: "",
         description: "",
         totalExpense: this.state.totalExpense + this.state.amount,
         balance: this.state.balance - this.state.amount
@@ -178,20 +169,16 @@ class App extends Component {
       putInLocalStorage(newExpense, "expense");
     } else if (this.state.amount === "" && this.state.description !== "") {
       this.setState({
-        classNameAmntSpan: "visible",
-        classNameAmntInput: "red"
+        amountValid: false
       });
     } else if (this.state.amount !== "" && this.state.description === "") {
       this.setState({
-        classNameDescrSpan: "visibleDescr",
-        classNameDescrInput: "red"
+        descriptionValid: false
       });
     } else {
       this.setState({
-        classNameDescrSpan: "visibleDescr",
-        classNameDescrInput: "red",
-        classNameAmntSpan: "visibleAmnt",
-        classNameAmntInput: "red"
+        descriptionValid: false,
+        amountValid: false
       });
     }
   };
@@ -241,10 +228,9 @@ class App extends Component {
       number.substring(number.length - index, number.length)
     );
   };
-  // returns the wanted number as a string with
+  // returns the wanted number as a string with comma for decimal space and dot for thousand, million etc.
   beautifyNumber = number => {
     let numToStr = number.toString();
-
     let numWithComma =
       numToStr.substring(0, numToStr.length - 3) +
       "," +
@@ -283,11 +269,9 @@ class App extends Component {
         <header>
           <h1>Account Balance Tracker</h1>
           <InputContainer
-            classNameDescrSpan={this.state.classNameDescrSpan}
-            classNameAmntSpan={this.state.classNameAmntSpan}
-            classNameDescrInput={this.state.classNameDescrInput}
+            descriptionValid={this.state.descriptionValid}
+            amountValid={this.state.amountValid}
             getDescription={this.getDescription}
-            classNameAmntInput={this.state.classNameAmntInput}
             getAmount={this.getAmount}
             getTransactionType={this.getTransactionType}
             addEntry={this.addEntry}
@@ -305,7 +289,7 @@ class App extends Component {
             data={this.state.income}
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
-            idForTotalContainer="incometc"
+            totalContainerId="total-income"
           />
 
           <EntryContainer
@@ -316,7 +300,7 @@ class App extends Component {
             data={this.state.expense}
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
-            idForTotalContainer="expensetc"
+            totalContainerId="total-expense"
           />
 
           <Balance

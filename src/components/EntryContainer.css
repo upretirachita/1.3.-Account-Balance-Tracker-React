@@ -32,7 +32,7 @@
 
 #income::-webkit-scrollbar-thumb,
 #expense::-webkit-scrollbar-thumb {
-  background-color: rgb(75, 73, 73);
+  background-color: rgb(111, 111, 111);
 }
 
 .added {
@@ -77,11 +77,11 @@
   color: rgb(67, 67, 67);
 }
 
-#incometc {
+#total-income {
   border-top: 1px solid var(--main-border-color);
 }
 
-#expensetc {
+#total-expense {
   border-left: 1px solid var(--main-border-color);
   border-radius: 0;
   border-top: 1px solid var(--main-border-color);
