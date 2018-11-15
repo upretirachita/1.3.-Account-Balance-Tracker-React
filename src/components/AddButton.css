@@ -1,0 +1,14 @@
+#add {
+  font-size: 1rem;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  line-height: 1rem;
+  padding: 17px 1.5rem;
+  background-color: rgb(81, 210, 134);
+  color: white;
+  box-shadow: 0 2px 2px rgb(228, 228, 228);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.01px;
+}

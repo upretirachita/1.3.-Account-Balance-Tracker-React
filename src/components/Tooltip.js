@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import "./Tooltip.css";
 
 const Tooltip = props => {
   return (
@@ -9,3 +11,9 @@ const Tooltip = props => {
 };
 
 export default Tooltip;
+
+Tooltip.propTypes = {
+  id: PropTypes.string,
+  className: PropTypes.string,
+  text: PropTypes.string
+};

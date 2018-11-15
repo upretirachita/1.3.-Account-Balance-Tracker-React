@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import "./DeleteButton.css";
 
 const DeleteButton = props => {
   return (
@@ -50,3 +52,10 @@ const DeleteButton = props => {
   );
 };
 export default DeleteButton;
+
+DeleteButton.propTypes = {
+  value: PropTypes.string,
+  deleteEntry: PropTypes.func,
+  array: PropTypes.array,
+  incomeOrExpense: PropTypes.string
+};

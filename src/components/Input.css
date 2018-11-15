@@ -1,0 +1,44 @@
+input {
+  font-size: 1rem;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  line-height: 1rem;
+}
+
+#description {
+  width: 42.1%;
+  margin-right: 0.5rem;
+  padding: 1rem 1.5rem;
+}
+
+#amount {
+  width: 20%;
+  margin-right: 0.5rem;
+  padding: 1rem 1.5rem;
+}
+
+.default {
+  background: var(--main-background-color);
+  color: rgb(53, 53, 53);
+  padding: 24px 8px;
+  border-bottom: 2px solid transparent;
+}
+
+.default:focus {
+  border-bottom: 2px solid rgb(69, 69, 69);
+}
+
+.red {
+  background: #fbe9e7;
+  border-bottom: 2px solid white;
+}
+
+.red:focus {
+  border-bottom: 2px solid rgb(252, 55, 55);
+  background: #fbe9e7;
+}
+
+::-webkit-input-placeholder {
+  color: rgb(201, 201, 201);
+}

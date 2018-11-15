@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Header from "./components/Header";
+import InputContainer from "./components/InputContainer";
 import EntryContainer from "./components/EntryContainer";
 import Balance from "./components/BalanceContainer";
 import "./App.css";
 
 // *************** TO DO ******************
 //  - add edit function
-//  - make tooltips with components
 //  - use reduce in calculating balance
 //  - add prop types
 // ********************************* HELPER FUNCTIONS *********************************
@@ -209,7 +208,6 @@ class App extends Component {
         }
         return result;
       });
-
       if (incomeOrExpense === "income") {
         this.setState({
           income: newArray,
@@ -282,18 +280,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header
-          classNameDescrSpan={this.state.classNameDescrSpan}
-          classNameAmntSpan={this.state.classNameAmntSpan}
-          classNameDescrInput={this.state.classNameDescrInput}
-          getDescription={this.getDescription}
-          classNameAmntInput={this.state.classNameAmntInput}
-          getAmount={this.getAmount}
-          getTransactionType={this.getTransactionType}
-          addEntry={this.addEntry}
-          description={this.state.description}
-          amountInput={this.state.amountInput}
-        />
+        <header>
+          <h1>Account Balance Tracker</h1>
+          <InputContainer
+            classNameDescrSpan={this.state.classNameDescrSpan}
+            classNameAmntSpan={this.state.classNameAmntSpan}
+            classNameDescrInput={this.state.classNameDescrInput}
+            getDescription={this.getDescription}
+            classNameAmntInput={this.state.classNameAmntInput}
+            getAmount={this.getAmount}
+            getTransactionType={this.getTransactionType}
+            addEntry={this.addEntry}
+            description={this.state.description}
+            amountInput={this.state.amountInput}
+          />
+        </header>
 
         <main className="main">
           <EntryContainer

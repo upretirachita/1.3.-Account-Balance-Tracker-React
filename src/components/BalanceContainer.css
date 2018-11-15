@@ -1,0 +1,50 @@
+#total {
+  color: gray;
+  font-family: "Roboto Mono", "monospace";
+}
+
+#balance-container {
+  width: 100%;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#h3-balance {
+  background-color: white;
+  border-top: 1px solid var(--main-border-color);
+  font-weight: bold;
+  color: gray;
+  font-size: 1rem;
+}
+
+.total-balance-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.5rem;
+  line-height: 1rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: rgb(67, 67, 67);
+  border-top: 1px solid var(--main-border-color);
+}
+
+.total-container span {
+  text-align: right;
+}
+
+#total-balance {
+  font-weight: bold;
+  font-family: "Roboto Mono", "monospace";
+}
+
+.default-balance {
+  color: rgb(67, 67, 67);
+}
+
+.red-balance {
+  color: rgb(210, 81, 81);
+}

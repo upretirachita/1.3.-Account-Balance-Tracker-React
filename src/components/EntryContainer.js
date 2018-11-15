@@ -1,5 +1,7 @@
 import React from "react";
 import DeleteButton from "./DeleteButton";
+import PropTypes from "prop-types";
+import "./EntryContainer.css";
 
 const EntryContainer = props => {
   return (
@@ -39,3 +41,14 @@ const EntryContainer = props => {
 };
 
 export default EntryContainer;
+
+EntryContainer.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  total: PropTypes.string,
+  totalAmount: PropTypes.string,
+  data: PropTypes.array,
+  deleteEntry: PropTypes.func,
+  beautifyNumber: PropTypes.func,
+  idForTotalContainer: PropTypes.string
+};

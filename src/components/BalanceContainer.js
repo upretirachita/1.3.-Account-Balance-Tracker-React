@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
+import "./BalanceContainer.css";
 
 const Balance = props => (
   <div id="balance-container">
-    <h3 id="h3-balance">Balance</h3>
-    <div className="total-container">
-      <span>Total:</span>
+    <div className="total-balance-container">
+      <span>Total balance:</span>
       <span
         id="total-balance"
         className={props.balance < 0 ? "red-balance" : "default-balance"}
@@ -16,3 +17,9 @@ const Balance = props => (
 );
 
 export default Balance;
+
+Balance.propTypes = {
+  makeBalanceRed: PropTypes.func,
+  beautifyNumber: PropTypes.func,
+  balance: PropTypes.number
+};

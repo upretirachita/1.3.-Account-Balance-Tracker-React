@@ -1,0 +1,18 @@
+.delete {
+  width: 1.5rem;
+  height: 1.3rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 1.3rem;
+  font-size: 0.8rem;
+  outline: none;
+  color: gray;
+  text-align: left;
+}
+
+.delete svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: 3px;
+}
