@@ -182,6 +182,57 @@ class App extends Component {
       });
     }
   };
+  editEntry = (id, array, incomeOrExpense, e, initialText) => {
+    let newDescription = e.target.textContent;
+    let target = e.target;
+    console.log(id);
+    if (newDescription.length < 17 && newDescription !== "") {
+      let newArray = array.map(object => {
+        let result;
+        if (!object.id.includes(id)) {
+          result = object;
+        } else {
+          result = { ...object, description: newDescription };
+        }
+        console.log(result);
+        return result;
+      });
+      console.log("newArray", newArray);
+
+      if (incomeOrExpense === "income") {
+        this.setState({
+          income: newArray
+        });
+
+        putInLocalStorage(newArray, "income");
+      } else {
+        this.setState({
+          expense: newArray
+        });
+
+        putInLocalStorage(newArray, "expense");
+      }
+      console.log(newArray);
+
+      e.target.blur();
+    } else {
+      console.log("too long");
+      e.target.textContent = initialText;
+      target.className = "description-entry-input-red";
+      let showRed = setInterval(function() {
+        target.className = "description-entry-input";
+      }, 200);
+      let hideRed = setInterval(function() {
+        target.className = "description-entry-input-red";
+      }, 400);
+      setTimeout(function() {
+        clearInterval(showRed);
+        clearInterval(hideRed);
+        target.className = "description-entry-input";
+      }, 700);
+      e.target.blur();
+    }
+  };
   deleteEntry = (id, array, incomeOrExpense) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
       let deletedEntryAmount;
@@ -290,6 +341,7 @@ class App extends Component {
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-income"
+            editEntry={this.editEntry}
           />
 
           <EntryContainer
@@ -301,6 +353,7 @@ class App extends Component {
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-expense"
+            editEntry={this.editEntry}
           />
 
           <Balance

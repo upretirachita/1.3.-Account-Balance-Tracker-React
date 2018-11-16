@@ -18,7 +18,34 @@ const EntryContainer = props => {
               incomeOrExpense={props.id}
             />
             <span className="dateAndTime">{element.time}</span>
-            <span id="description-value">{element.description}</span>
+            <span
+              id="description-value"
+              className="description-entry-input"
+              contentEditable="true"
+              onBlur={e => {
+                props.editEntry(
+                  element.id,
+                  props.data,
+                  props.id,
+                  e,
+                  element.description
+                );
+              }}
+              onKeyUp={e => {
+                if (e.key === "Enter") {
+                  props.editEntry(
+                    element.id,
+                    props.data,
+                    props.id,
+                    e,
+                    element.description
+                  );
+                }
+              }}
+              suppressContentEditableWarning="true"
+            >
+              {element.description}
+            </span>
             <span id="amount-value">
               {(props.name === "Expense" ? "-" : "") +
                 props.beautifyNumber(element.amount.toFixed(2))}{" "}
