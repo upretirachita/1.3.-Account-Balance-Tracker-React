@@ -14,13 +14,12 @@ const EntrySpan = props => {
       }}
       onKeyDown={e => {
         if (e.key === "Enter") {
-          let evente = e;
           e.preventDefault();
           props.editEntry(
             props.element.id,
             props.data,
             props.arrayName,
-            evente,
+            e,
             props.element.description
           );
         }

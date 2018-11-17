@@ -3,63 +3,23 @@ import InputContainer from "./components/InputContainer";
 import EntryContainer from "./components/EntryContainer";
 import Balance from "./components/BalanceContainer";
 import "./App.css";
+import {
+  displayDateTime,
+  userIdGenerator,
+  getInitialTotals,
+  putInLocalStorage,
+  lsIncome,
+  lsExpense,
+  lsTotalIncome,
+  lsTotalExpense
+} from "./components/HelperFunctions";
 
 // *************** TO DO ******************
 //  - add edit function
-//  - use reduce in calculating balance
+//  - use reduce
 // ********************************* HELPER FUNCTIONS *********************************
 
-function numbersWithZero(number) {
-  return String("000" + number).slice(-2);
-}
-
-function displayDateTime() {
-  let date = new Date();
-  let day = numbersWithZero(date.getDate());
-  let month = numbersWithZero(date.getMonth() + 1);
-  let year = date.getFullYear();
-  let hour = numbersWithZero(date.getHours());
-  let minutes = numbersWithZero(date.getMinutes());
-  return `${day}/${month}/${year} ${hour}:${minutes}`;
-}
-
-function userIdGenerator() {
-  let characters =
-    "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  let id = "";
-  for (let i = 0; i < 7; i++) {
-    let random = Math.floor(Math.random() * 61);
-    id = id.concat(characters.charAt(random));
-  }
-  return id;
-}
-// ********************************* HANDLING DATA IN LOCAL STORAGE *********************************
-
-function putInLocalStorage(arraytoPut, lsArrayNameStr) {
-  localStorage.setItem(lsArrayNameStr, JSON.stringify(arraytoPut));
-}
-
-function getFromLocalStorage(lsArrayNameStr) {
-  return JSON.parse(localStorage.getItem(lsArrayNameStr));
-}
-
-let lsIncome = getFromLocalStorage("income");
-let lsExpense = getFromLocalStorage("expense");
-let lsTotalIncome = 0;
-let lsTotalExpense = 0;
-
-const getInitialTotals = () => {
-  if (lsIncome && lsExpense) {
-    lsIncome.forEach(income => (lsTotalIncome += income.amount));
-    lsExpense.forEach(expense => (lsTotalExpense += expense.amount));
-  }
-};
-
 getInitialTotals();
-
-// **************************************************************************************
-// **********************************--- APP ---*****************************************
-// **************************************************************************************
 
 class App extends Component {
   state = {
