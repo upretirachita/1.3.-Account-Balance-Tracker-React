@@ -2,6 +2,7 @@ import React from "react";
 import DeleteButton from "./DeleteButton";
 import PropTypes from "prop-types";
 import "./EntryContainer.css";
+import EntrySpan from "./EntrySpan";
 
 const EntryContainer = props => {
   return (
@@ -18,34 +19,15 @@ const EntryContainer = props => {
               incomeOrExpense={props.id}
             />
             <span className="dateAndTime">{element.time}</span>
-            <span
+            <EntrySpan
               id="description-value"
               className="description-entry-input"
-              contentEditable="true"
-              onBlur={e => {
-                props.editEntry(
-                  element.id,
-                  props.data,
-                  props.id,
-                  e,
-                  element.description
-                );
-              }}
-              onKeyUp={e => {
-                if (e.key === "Enter") {
-                  props.editEntry(
-                    element.id,
-                    props.data,
-                    props.id,
-                    e,
-                    element.description
-                  );
-                }
-              }}
-              suppressContentEditableWarning="true"
-            >
-              {element.description}
-            </span>
+              editEntry={props.editEntry}
+              element={element}
+              data={props.data}
+              arrayName={props.id}
+            />
+
             <span id="amount-value">
               {(props.name === "Expense" ? "-" : "") +
                 props.beautifyNumber(element.amount.toFixed(2))}{" "}
@@ -73,7 +55,7 @@ EntryContainer.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   total: PropTypes.string,
-  totalAmount: PropTypes.string,
+  totalAmount: PropTypes.number,
   data: PropTypes.array,
   deleteEntry: PropTypes.func,
   beautifyNumber: PropTypes.func,

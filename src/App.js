@@ -183,56 +183,53 @@ class App extends Component {
     }
   };
   editEntry = (id, array, incomeOrExpense, e, initialText) => {
-    let newDescription = e.target.textContent;
-    let target = e.target;
-    console.log(id);
-    if (newDescription.length < 17 && newDescription !== "") {
+    let newEntry = e.target.textContent;
+    e.target.textContent = initialText;
+    if (newEntry.length < 17 && newEntry !== "") {
       let newArray = array.map(object => {
         let result;
         if (!object.id.includes(id)) {
           result = object;
         } else {
-          result = { ...object, description: newDescription };
+          result = { ...object, description: newEntry };
         }
-        console.log(result);
         return result;
       });
-      console.log("newArray", newArray);
-
       if (incomeOrExpense === "income") {
         this.setState({
           income: newArray
         });
-
         putInLocalStorage(newArray, "income");
       } else {
         this.setState({
           expense: newArray
         });
-
         putInLocalStorage(newArray, "expense");
       }
-      console.log(newArray);
-
       e.target.blur();
     } else {
-      console.log("too long");
       e.target.textContent = initialText;
-      target.className = "description-entry-input-red";
-      let showRed = setInterval(function() {
-        target.className = "description-entry-input";
-      }, 200);
-      let hideRed = setInterval(function() {
-        target.className = "description-entry-input-red";
-      }, 400);
-      setTimeout(function() {
-        clearInterval(showRed);
-        clearInterval(hideRed);
-        target.className = "description-entry-input";
-      }, 700);
+      this.validateEdit(e);
       e.target.blur();
     }
   };
+
+  validateEdit = e => {
+    let target = e.target;
+    target.className = "description-entry-input-red";
+    let showRed = setInterval(function() {
+      target.className = "description-entry-input";
+    }, 200);
+    let hideRed = setInterval(function() {
+      target.className = "description-entry-input-red";
+    }, 400);
+    setTimeout(function() {
+      clearInterval(showRed);
+      clearInterval(hideRed);
+      target.className = "description-entry-input";
+    }, 700);
+  };
+
   deleteEntry = (id, array, incomeOrExpense) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
       let deletedEntryAmount;
@@ -281,7 +278,8 @@ class App extends Component {
   };
   // returns the wanted number as a string with comma for decimal space and dot for thousand, million etc.
   beautifyNumber = number => {
-    let numToStr = number.toString();
+    let safeFix = parseFloat(number).toFixed(2);
+    let numToStr = safeFix.toString();
     let numWithComma =
       numToStr.substring(0, numToStr.length - 3) +
       "," +
@@ -336,7 +334,7 @@ class App extends Component {
             name="Income"
             id="income"
             total="Total income:"
-            totalAmount={this.state.totalIncome.toFixed(2)}
+            totalAmount={this.state.totalIncome}
             data={this.state.income}
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
@@ -348,7 +346,7 @@ class App extends Component {
             name="Expense"
             id="expense"
             total="Total expense:"
-            totalAmount={this.state.totalExpense.toFixed(2)}
+            totalAmount={this.state.totalExpense}
             data={this.state.expense}
             deleteEntry={this.deleteEntry}
             beautifyNumber={this.beautifyNumber}
