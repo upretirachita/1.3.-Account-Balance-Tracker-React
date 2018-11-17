@@ -10,17 +10,19 @@ const EntrySpan = props => {
         e.target.textContent = props.element.description;
       }}
       onBlur={e => {
-        props.editEntry(
-          props.element.id,
-          props.data,
-          props.arrayName,
-          e,
-          props.element.description
-        );
+        e.target.textContent = props.element.description;
       }}
       onKeyDown={e => {
         if (e.key === "Enter") {
+          let evente = e;
           e.preventDefault();
+          props.editEntry(
+            props.element.id,
+            props.data,
+            props.arrayName,
+            evente,
+            props.element.description
+          );
         }
       }}
       suppressContentEditableWarning="true"
