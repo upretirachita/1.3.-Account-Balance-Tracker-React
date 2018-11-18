@@ -7,7 +7,7 @@ import Tooltip from "./Tooltip";
 
 const EntryContainer = props => {
   let tooltip =
-    props.entryValid === false ? (
+    props.editValid === false ? (
       <Tooltip
         id={`edit-${props.id}-tooltip`}
         text="Enter text min. 1 max. 16 characters"

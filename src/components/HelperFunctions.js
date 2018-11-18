@@ -37,9 +37,25 @@ export let lsExpense = getFromLocalStorage("expense");
 export let lsTotalIncome = 0;
 export let lsTotalExpense = 0;
 
-export const getInitialTotals = () => {
+export function getInitialTotals() {
   if (lsIncome && lsExpense) {
     lsIncome.forEach(income => (lsTotalIncome += income.amount));
     lsExpense.forEach(expense => (lsTotalExpense += expense.amount));
   }
-};
+}
+
+export function validateEdit(e) {
+  let target = e.target;
+  target.className = "description-entry-input-red";
+  let showRed = setInterval(function() {
+    target.className = "description-entry-input";
+  }, 200);
+  let hideRed = setInterval(function() {
+    target.className = "description-entry-input-red";
+  }, 400);
+  setTimeout(function() {
+    clearInterval(showRed);
+    clearInterval(hideRed);
+    target.className = "description-entry-input";
+  }, 700);
+}

@@ -11,13 +11,9 @@ import {
   lsIncome,
   lsExpense,
   lsTotalIncome,
-  lsTotalExpense
+  lsTotalExpense,
+  validateEdit
 } from "./components/HelperFunctions";
-
-// *************** TO DO ******************
-//  - add edit function
-//  - use reduce
-// ********************************* HELPER FUNCTIONS *********************************
 
 getInitialTotals();
 
@@ -35,8 +31,8 @@ class App extends Component {
     descriptionValid: true,
     amountValid: true,
     editValid: true,
-    incomeEntryValid: true,
-    expenseEntryValid: true
+    incomeEditValid: true,
+    expenseEditValid: true
   };
 
   getDescription = e => {
@@ -44,15 +40,15 @@ class App extends Component {
       this.setState({
         description: e.target.value.toString(),
         descriptionValid: true,
-        incomeEntryValid: true,
-        expenseEntryValid: true
+        incomeEditValid: true,
+        expenseEditValid: true
       });
     } else {
       this.setState({
         description: "",
         descriptionValid: false,
-        incomeEntryValid: true,
-        expenseEntryValid: true
+        incomeEditValid: true,
+        expenseEditValid: true
       });
     }
   };
@@ -69,16 +65,16 @@ class App extends Component {
         amountInput: "",
         amount: "",
         amountValid: false,
-        incomeEntryValid: true,
-        expenseEntryValid: true
+        incomeEditValid: true,
+        expenseEditValid: true
       });
     } else {
       this.setState({
         amountInput: e.target.value,
         amount: parseFloat(e.target.value),
         amountValid: true,
-        incomeEntryValid: true,
-        expenseEntryValid: true
+        incomeEditValid: true,
+        expenseEditValid: true
       });
     }
   };
@@ -169,15 +165,15 @@ class App extends Component {
       if (incomeOrExpense === "income") {
         this.setState({
           income: newArray,
-          incomeEntryValid: true,
-          expenseEntryValid: true
+          incomeEditValid: true,
+          expenseEditValid: true
         });
         putInLocalStorage(newArray, "income");
       } else {
         this.setState({
           expense: newArray,
-          expenseEntryValid: true,
-          incomeEntryValid: true
+          expenseEditValid: true,
+          incomeEditValid: true
         });
         putInLocalStorage(newArray, "expense");
       }
@@ -187,40 +183,24 @@ class App extends Component {
       (newEntry === "" && incomeOrExpense === "income")
     ) {
       this.setState({
-        incomeEntryValid: false,
-        expenseEntryValid: true
+        incomeEditValid: false,
+        expenseEditValid: true
       });
       e.target.textContent = initialText;
-      this.validateEdit(e);
+      validateEdit(e);
       e.target.blur();
     } else if (
       newEntry.length >= 17 ||
       (newEntry === "" && incomeOrExpense === "expense")
     ) {
       this.setState({
-        incomeEntryValid: true,
-        expenseEntryValid: false
+        incomeEditValid: true,
+        expenseEditValid: false
       });
       e.target.textContent = initialText;
-      this.validateEdit(e);
+      validateEdit(e);
       e.target.blur();
     }
-  };
-
-  validateEdit = e => {
-    let target = e.target;
-    target.className = "description-entry-input-red";
-    let showRed = setInterval(function() {
-      target.className = "description-entry-input";
-    }, 200);
-    let hideRed = setInterval(function() {
-      target.className = "description-entry-input-red";
-    }, 400);
-    setTimeout(function() {
-      clearInterval(showRed);
-      clearInterval(hideRed);
-      target.className = "description-entry-input";
-    }, 700);
   };
 
   deleteEntry = (id, array, incomeOrExpense) => {
@@ -333,7 +313,7 @@ class App extends Component {
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-income"
             editEntry={this.editEntry}
-            entryValid={this.state.incomeEntryValid}
+            editValid={this.state.incomeEditValid}
           />
 
           <EntryContainer
@@ -346,7 +326,7 @@ class App extends Component {
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-expense"
             editEntry={this.editEntry}
-            entryValid={this.state.expenseEntryValid}
+            editValid={this.state.expenseEditValid}
           />
 
           <Balance
