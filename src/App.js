@@ -33,19 +33,26 @@ class App extends Component {
     amountInput: "",
     typeOfEntry: "income", // selection 'income' or 'expense'
     descriptionValid: true,
-    amountValid: true
+    amountValid: true,
+    editValid: true,
+    incomeEntryValid: true,
+    expenseEntryValid: true
   };
 
   getDescription = e => {
     if (e.target.value.length <= 17) {
       this.setState({
         description: e.target.value.toString(),
-        descriptionValid: true
+        descriptionValid: true,
+        incomeEntryValid: true,
+        expenseEntryValid: true
       });
     } else {
       this.setState({
         description: "",
-        descriptionValid: false
+        descriptionValid: false,
+        incomeEntryValid: true,
+        expenseEntryValid: true
       });
     }
   };
@@ -61,13 +68,17 @@ class App extends Component {
       this.setState({
         amountInput: "",
         amount: "",
-        amountValid: false
+        amountValid: false,
+        incomeEntryValid: true,
+        expenseEntryValid: true
       });
     } else {
       this.setState({
         amountInput: e.target.value,
         amount: parseFloat(e.target.value),
-        amountValid: true
+        amountValid: true,
+        incomeEntryValid: true,
+        expenseEntryValid: true
       });
     }
   };
@@ -157,17 +168,39 @@ class App extends Component {
       });
       if (incomeOrExpense === "income") {
         this.setState({
-          income: newArray
+          income: newArray,
+          incomeEntryValid: true,
+          expenseEntryValid: true
         });
         putInLocalStorage(newArray, "income");
       } else {
         this.setState({
-          expense: newArray
+          expense: newArray,
+          expenseEntryValid: true,
+          incomeEntryValid: true
         });
         putInLocalStorage(newArray, "expense");
       }
       e.target.blur();
-    } else {
+    } else if (
+      newEntry.length >= 17 ||
+      (newEntry === "" && incomeOrExpense === "income")
+    ) {
+      this.setState({
+        incomeEntryValid: false,
+        expenseEntryValid: true
+      });
+      e.target.textContent = initialText;
+      this.validateEdit(e);
+      e.target.blur();
+    } else if (
+      newEntry.length >= 17 ||
+      (newEntry === "" && incomeOrExpense === "expense")
+    ) {
+      this.setState({
+        incomeEntryValid: true,
+        expenseEntryValid: false
+      });
       e.target.textContent = initialText;
       this.validateEdit(e);
       e.target.blur();
@@ -300,6 +333,7 @@ class App extends Component {
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-income"
             editEntry={this.editEntry}
+            entryValid={this.state.incomeEntryValid}
           />
 
           <EntryContainer
@@ -312,6 +346,7 @@ class App extends Component {
             beautifyNumber={this.beautifyNumber}
             totalContainerId="total-expense"
             editEntry={this.editEntry}
+            entryValid={this.state.expenseEntryValid}
           />
 
           <Balance

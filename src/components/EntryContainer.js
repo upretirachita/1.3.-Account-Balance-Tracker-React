@@ -3,12 +3,22 @@ import DeleteButton from "./DeleteButton";
 import PropTypes from "prop-types";
 import "./EntryContainer.css";
 import EntrySpan from "./EntrySpan";
+import Tooltip from "./Tooltip";
 
 const EntryContainer = props => {
+  let tooltip =
+    props.entryValid === false ? (
+      <Tooltip
+        id={`edit-${props.id}-tooltip`}
+        text="Enter text min. 1 max. 16 characters"
+      />
+    ) : (
+      <span />
+    );
   return (
     <div className="entry-container" id={props.id + "-container"}>
       <h3 id={"h3-" + props.id}>{props.name}</h3>
-
+      {tooltip}
       <div id={props.id}>
         {props.data.map(element => (
           <div key={element.id + "entry"} className="added">
