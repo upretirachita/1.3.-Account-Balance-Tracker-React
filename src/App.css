@@ -38,7 +38,7 @@ h1 {
 }
 
 .main {
-  width: 75%;
+  width: 77%;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -57,16 +57,76 @@ h1 {
   font-size: 1rem;
 }
 
-@media only screen and (max-width: 1272px) {
-}
-@media only screen and (max-width: 1087px) {
-}
-
-@media only screen and (max-width: 800px) {
+@media only screen and (min-width: 1424px) {
+  .App {
+    width: 1424px;
+  }
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 1410px) {
+  .main {
+    width: 87%;
+  }
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 1255px) {
+  .main {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1210px) {
+  .main {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1152px) {
+  :root {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 1124px) {
+  :root {
+    font-size: 1rem;
+  }
+  .main {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 879px) {
+  .main {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 665px) {
+  .main {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 589px) {
+  :root {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 497px) {
+  :root {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .main {
+    min-width: 320px;
+  }
 }

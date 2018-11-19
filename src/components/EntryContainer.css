@@ -189,3 +189,25 @@
 .description-entry-input-red {
   background: #fbe9e7;
 }
+
+@media only screen and (max-width: 1124px) {
+  .entry-container {
+    width: 100%;
+  }
+
+  #edit-income-tooltip {
+    left: 34.5%;
+    top: 40px;
+    background: rgb(74, 74, 74);
+    box-shadow: 1px 2px 2px rgba(128, 128, 128, 0.697);
+    border-radius: 2px;
+  }
+
+  #expense {
+    border-left: none;
+  }
+
+  #total-expense {
+    border-left: none;
+  }
+}

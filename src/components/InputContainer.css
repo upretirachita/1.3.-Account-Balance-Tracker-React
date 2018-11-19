@@ -1,12 +1,12 @@
 #input-container {
   height: fit-content;
-  width: 98.5%;
+  width: 77%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto 2rem;
-  padding: 1rem 2rem 2rem;
+  padding: 1rem 0 2rem;
   border-bottom: 1px solid transparent;
   border-radius: 2px;
   background-color: white;
@@ -18,7 +18,68 @@
   position: relative;
 }
 
+#input-container-child {
+  width: 100%;
+  display: flex;
+}
+
 #add:active {
   background-color: rgb(60, 175, 108);
   box-shadow: 0 2px 2px rgb(208, 207, 207);
+}
+
+@media only screen and (max-width: 1410px) {
+  #input-container {
+    width: 87%;
+  }
+}
+
+@media only screen and (max-width: 1255px) {
+  #input-container {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1210px) {
+  #input-container {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1124px) {
+  #input-container {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 879px) {
+  #input-container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #input-container {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 655px) {
+  #input-container {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 487px) {
+  #input-container-child {
+    flex-wrap: wrap;
+  }
+  #input-container-child {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .input-container {
+    min-width: 320px;
+  }
 }

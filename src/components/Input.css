@@ -7,14 +7,14 @@ input {
 }
 
 #description {
-  width: 42.1%;
-  margin-right: 0.5rem;
+  width: 51.2%;
+  margin-right: 0.7%;
   padding: 1rem 1.5rem;
 }
 
 #amount {
-  width: 20%;
-  margin-right: 0.5rem;
+  width: 27%;
+  margin-right: 0.7%;
   padding: 1rem 1.5rem;
 }
 
@@ -41,4 +41,21 @@ input {
 
 ::-webkit-input-placeholder {
   color: rgb(201, 201, 201);
+}
+
+@media only screen and (max-width: 485px) {
+  #description {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.1rem;
+  }
+
+  #amount {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1.9rem;
+    padding: 1rem 2.1rem;
+  }
 }

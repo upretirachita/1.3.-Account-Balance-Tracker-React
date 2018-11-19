@@ -33,28 +33,29 @@ const Header = props => {
         {descriptionSpan}
         {amountSpan}
       </div>
+      <div id="input-container-child">
+        <Input
+          type="text"
+          placeholder="Description"
+          id="description"
+          className={props.descriptionValid ? "default" : "red"}
+          getValue={props.getDescription}
+          inputValue={props.description}
+        />
 
-      <Input
-        type="text"
-        placeholder="Description"
-        id="description"
-        className={props.descriptionValid ? "default" : "red"}
-        getValue={props.getDescription}
-        inputValue={props.description}
-      />
+        <Input
+          type="text"
+          placeholder="Amount"
+          id="amount"
+          className={props.amountValid ? "default" : "red"}
+          getValue={props.getAmount}
+          inputValue={props.amountInput}
+        />
 
-      <Input
-        type="text"
-        placeholder="Amount"
-        id="amount"
-        className={props.amountValid ? "default" : "red"}
-        getValue={props.getAmount}
-        inputValue={props.amountInput}
-      />
+        <CustomDropdown getTransactionType={props.getTransactionType} />
 
-      <CustomDropdown getTransactionType={props.getTransactionType} />
-
-      <AddButton handleClick={props.addEntry} />
+        <AddButton handleClick={props.addEntry} />
+      </div>
     </div>
   );
 };
