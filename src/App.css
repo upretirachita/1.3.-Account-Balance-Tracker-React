@@ -120,6 +120,9 @@ h1 {
 }
 
 @media only screen and (max-width: 497px) {
+  body {
+    width: 100%;
+  }
   :root {
     font-size: 0.7rem;
   }
